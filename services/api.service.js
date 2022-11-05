@@ -17,7 +17,7 @@ const axios = require("axios");
 const searchGames=(name, genre, platform)=> {
     let getAllGame = {
       method: "GET",
-      url: `https://api.rawg.io/api/games?key=91126f5a9acd457aa8ad4ce73cd3a59f&search=${name}&genres=${genre}&platforms=${platform}`,
+      url: `https://api.rawg.io/api/games?key=91126f5a9acd457aa8ad4ce73cd3a59f&search=${name}&genres=${genre}&platform=${platform}`,
       headers: {
         key: process.env.API_KEY
       },
