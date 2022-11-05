@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require('../models/User.model');
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const Game = require("../models/Game.model");
 
 //go to user Profile
 
@@ -32,7 +33,21 @@ router.post("/profile/delete/:id", async (req, res, next) =>{
     }
 })
 
+router.post("/deleteFavGame/:id", async (req, res, next) => {
 
+    const gameId = req.params.id;
+    const userId = req.session.currentUser._id
+
+    try {
+        /* const gameToRemove = await Game.findById(gameId) */
+
+        await User.findByIdAndUpdate(userId, {$pull: {favoriteGames: gameId}});
+        res.redirect("/profile")
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
 
 module.exports = router;
 
