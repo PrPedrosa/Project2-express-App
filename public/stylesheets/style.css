@@ -20,6 +20,9 @@ nav{
   align-items: center;
   justify-content: space-around;
   background-color: aqua;
-  padding: 4vh;
+  padding: 1vh;
+}
 
+nav img {
+  width: 10vh
 }
