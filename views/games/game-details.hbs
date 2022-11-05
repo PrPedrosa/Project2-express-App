@@ -19,8 +19,9 @@
     <h3>Description: </h3>
     <p>{{{description}}}</p>
 
+     {{#if website}}
     <a target="_blank" href="{{website}}">Website</a>
-
+     {{/if}}
 
     {{#if metacritic}}
     <h3>Rating:{{metacritic}}</h3>
@@ -28,6 +29,9 @@
 
     <h3>Released Date</h3>
     <p>{{released}}</p>
+
+    <button class ="addFavorites">Add to Favorites</button>
+    
 
 
     
