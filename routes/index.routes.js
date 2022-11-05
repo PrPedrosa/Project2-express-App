@@ -7,7 +7,8 @@ const getGames = require('../services/api.service');
 
 /* GET home page */
 router.get("/", async (req, res, next) => {
-  try {
+
+/*   try {
     const responseApi = await getGames("warzone");
     const games = responseApi.results
     console.log(responseApi.next)
@@ -23,7 +24,7 @@ router.get("/", async (req, res, next) => {
   } catch (error) {
     console.log(error);
     next(error)
-  }
+  } */
 
   res.render("index");
 });

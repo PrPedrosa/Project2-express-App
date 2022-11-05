@@ -15,10 +15,10 @@ const axios = require("axios");
 let allGenres = "action,adventure,shooter,strategy,indie,role-playing-games-rpg,casual,simulation,puzzle,arcade,platformer,racing,massively-multiplayer,sports,fighting,family,board-games,educational,card"
 
 
-const searchGames=(name)=> {
+const searchGames=(gameName)=> {
     let getAllGame = {
       method: "GET",
-      url: `https://api.rawg.io/api/games?key=91126f5a9acd457aa8ad4ce73cd3a59f&search=${name}`,
+      url: `https://api.rawg.io/api/games?key=91126f5a9acd457aa8ad4ce73cd3a59f&search=${gameName}&page_size=30`,
   /*     headers: {
         key: process.env.API_KEY
       }, */
