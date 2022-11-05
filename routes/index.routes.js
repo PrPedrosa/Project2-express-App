@@ -7,9 +7,10 @@ const getGames = require('../services/api.service');
 
 /* GET home page */
 router.get("/", async (req, res, next) => {
-  /* try {
-    const responseApi = await getGames("grand", "shooter", "pc");
+  try {
+    const responseApi = await getGames("warzone");
     const games = responseApi.results
+    console.log(responseApi.next)
     games.forEach(el => {
       gameTitle = el.name;
       genre = el.genres
@@ -21,7 +22,7 @@ router.get("/", async (req, res, next) => {
   } catch (error) {
     console.log(error);
     next(error)
-  } */
+  }
 
   res.render("index");
 });
