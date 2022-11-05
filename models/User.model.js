@@ -20,6 +20,11 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    games: {
+      type: Schema.Types.ObjectId, 
+      ref: 'Game',
+    },
+    profilePicture:String,
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
