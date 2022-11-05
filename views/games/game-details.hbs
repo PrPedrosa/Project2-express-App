@@ -1,14 +1,35 @@
 <h1>Game Details</h1>
 
 <div>
-    <p>Image:{{image}}</p>
+    <img src ={{background_image}} width="500px">
     <h3>Game title:{{name}}</h3>
-    <p>Genre:{{genre}}</p>
-    <p>Platform:{{platform}}</p>
-    <p>
-{{{description}}}
-    </p>
-    <p>Game_URL:{{game_URL}}</p>
-    <p>Rating:{{rating}}</p>
+
+
+    <h3>Genre</h3>
+    {{#each genres}}
+    <p>{{name}}</p>
+    {{/each}}
+
+
+    <h3>Platform</h3>
+    {{#each platforms}}
+    <p>{{platform.name}}</p>
+    {{/each}}
+
+    <h3>Description: </h3>
+    <p>{{{description}}}</p>
+
+    <a target="_blank" href="{{website}}">Website</a>
+
+
+    {{#if metacritic}}
+    <h3>Rating:{{metacritic}}</h3>
+    {{/if}}
+
+    <h3>Released Date</h3>
+    <p>{{released}}</p>
+
+
+    
 
 </div>

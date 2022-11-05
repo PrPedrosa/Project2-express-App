@@ -10,6 +10,10 @@ router.get("/details/:id", async(req, res, next) =>{
         const gameId = req.params.id;
         const game = await getOneGame(gameId);
         const description = game.description;
+        /* const metacritic = game.metacritic;
+        if(metacritic ==='null' && metacritic === 0){
+            return 0;
+        } */
         /* console.log(description)
         const bestDescription = description.substring(3, description.length - 3) */
         res.render("games/game-details", game);
