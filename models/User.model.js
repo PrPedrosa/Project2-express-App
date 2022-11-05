@@ -20,10 +20,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    favoriteGames: {
+    favoriteGames: [{
       type: Schema.Types.ObjectId, 
       ref: 'Game',
-    },
+    }],
     profilePicture: String,
   },
   {

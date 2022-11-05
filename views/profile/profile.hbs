@@ -1,0 +1,7 @@
+<div id="user-profile">
+<h2>This is {{username}} profile</h2>
+<a href="/auth/logout">Log Out</a>
+<form action="/profile/delete/{{_id}}" method="post">
+  <button type="submit">Delete account</button>
+</form>
+</div>
