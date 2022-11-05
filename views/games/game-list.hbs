@@ -1,0 +1,9 @@
+<h1>Game list</h1>
+
+{{#each games}}
+<h3>{{name}}</h3>
+<p>{{genres.0.name}}</p>
+{{#if genres.1.name}}
+<p>{{genres.1.name}}</p>
+{{/if}}
+{{/each}}
