@@ -1,13 +1,25 @@
+*{
+  margin: 0
+}
+
 body {
-  padding: 50px;
+  /* padding: 50px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00b7ff;
+  color: blue;
 }
 
 h1 {
   color: 15px;
 }
 
+nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: aqua;
+  padding: 4vh;
+
+}
