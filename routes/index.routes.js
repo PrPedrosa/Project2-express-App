@@ -13,9 +13,10 @@ router.get("/", async (req, res, next) => {
     console.log(responseApi.next)
     games.forEach(el => {
       gameTitle = el.name;
-      genre = el.genres
-      platform = el.platforms
+      genre = el.genres;
+      platform = el.platforms;
       console.log(gameTitle, genre, platform);  
+      
     });
     
     
