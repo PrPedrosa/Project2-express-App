@@ -1,5 +1,12 @@
 <div id="user-profile">
 <h2>This is {{username}} profile</h2>
+{{#each favoriteGames}}
+<p>{{title}}</p>
+<form action="/deleteFavGame/{{_id}}" method="post">
+<button type="submit">Delete Game</button>
+</form>
+{{/each}}
+
 <a href="/auth/logout">Log Out</a>
 <form action="/profile/delete/{{_id}}" method="post">
   <button type="submit">Delete account</button>

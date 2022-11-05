@@ -8,7 +8,9 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 router.get('/profile', isLoggedIn, async (req, res, next) =>{
     try {
         
-        const currentUser = req.session.currentUser
+        const currentUserId = req.session.currentUser._id;
+        /* currentUser.populate('favoriteGames'); */
+        const currentUser = await User.findById(currentUserId).populate('favoriteGames');
         console.log(currentUser)
         res.render('profile/profile', currentUser)
     } catch (error) {
@@ -29,6 +31,8 @@ router.post("/profile/delete/:id", async (req, res, next) =>{
         next(error)
     }
 })
+
+
 
 module.exports = router;
 

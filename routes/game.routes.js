@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Game = require('../models/Game.model');
 const getGames = require('../services/api.service');
 const getOneGame = require('../services/getOneGame');
+const User = require('../models/User.model');
 
 
 
@@ -35,6 +36,23 @@ router.post("/search", async (req, res, next) => {
         console.log(error)
         next(error);
     }
+})
+
+router.post('/addGame/:id', async (req, res, next) => {
+    const gameId = req.params.id;
+    const currentUser = req.session.currentUser;
+
+    try {
+        const favoriteGame = await getOneGame(gameId);
+        const{name, website} = favoriteGame;
+        const gameToAdd = await Game.create({title:name, game_URL:website})
+        await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
+        res.redirect('/profile');
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+    
 })
 
 
