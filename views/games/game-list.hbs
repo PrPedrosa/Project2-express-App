@@ -1,6 +1,7 @@
 <h1>Game list</h1>
 
 {{#each games}}
+<img src={{background_image}} alt="">
 <h3>{{name}}</h3>
 <p>{{genres.0.name}}</p>
 {{#if genres.1.name}}
@@ -8,3 +9,19 @@
 {{/if}}
 <a href="/details/{{id}}">Go to details</a>
 {{/each}}
+
+{{!-- <div class="container">
+{{#each games}}
+<div class="card" style="width: 18rem;">
+  <img src={{background_image}} class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{name}}</h5>
+    <p>{{genres.0.name}}</p>
+    {{#if genres.1.name}}
+    <p>{{genres.1.name}}</p>
+    {{/if}}
+    <a href="/details/{{id}}">Go to details</a>
+  </div>
+</div>
+{{/each}}
+</div> --}}

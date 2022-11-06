@@ -26,3 +26,8 @@ nav{
 nav img {
   width: 10vh
 }
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+}
