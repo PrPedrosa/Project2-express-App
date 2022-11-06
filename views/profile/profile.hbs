@@ -17,13 +17,7 @@
 <button type="submit">Delete Game</button>
 </form>
 {{/each}}
-
-{{!-- {{#each favoriteGames.genre}}
-<h3>Genre of the Game</h3>
-<p>{{genres.name}}</p>
-
-{{/each}} --}}
-
+<a href="/create-game">Add Game</a>
 <a href="/auth/logout">Log Out</a>
 
 <form action="/profile/delete/{{_id}}" method="post">

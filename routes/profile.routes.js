@@ -3,6 +3,7 @@ const User = require('../models/User.model');
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 const Game = require("../models/Game.model");
+const fileUploader = require('../config/cloudinary.config');
 
 //go to user Profile
 
@@ -49,6 +50,33 @@ router.post("/deleteFavGame/:id", async (req, res, next) => {
         next(error)
     }
 })
+
+// create a game
+
+router.get("/create-game", (req, res, next) => res.render("profile/create-game-form"))
+
+router.post("/create-game", fileUploader.single('image'), async(req, res, next) =>{
+    const user = req.session.currentUser
+    const {title, genre, platform, publisher, description, game_URL} = req.body;
+    try {
+        let imageUrl;
+
+        if (req.file) {
+            imageUrl = req.file.path;
+          } else {
+            imageUrl = 'https://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG';
+          }
+        
+        const createdGame = await Game.create({title, genre, platform, publisher, description, game_URL, image: imageUrl});
+        await User.findByIdAndUpdate(user._id, {$push: {favoriteGames: createdGame}});
+        res.redirect("/profile");
+
+    } catch (error) {
+        console.log(error)
+        next(error)
+    } 
+})
+
 
 module.exports = router;
 
