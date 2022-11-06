@@ -1,12 +1,28 @@
 <div id="user-profile">
 <img src="images/osrs_bot-removebg-preview.png" alt="profilepic">
 <h2>This is {{username}} profile</h2>
+
+
 {{#each favoriteGames}}
 <p>{{title}}</p>
+<img src="{{image}}" alt="game Image" width="400px">
+<p>{{genre.0.name}}</p>
+{{#if genre.1.name}}
+{{genre.1.name}}
+{{/if}}
+<a href="/details/{{apiId}}">See details</a>
+
+
 <form action="/deleteFavGame/{{_id}}" method="post">
 <button type="submit">Delete Game</button>
 </form>
 {{/each}}
+
+{{!-- {{#each favoriteGames.genre}}
+<h3>Genre of the Game</h3>
+<p>{{genres.name}}</p>
+
+{{/each}} --}}
 
 <a href="/auth/logout">Log Out</a>
 

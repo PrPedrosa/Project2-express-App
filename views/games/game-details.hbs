@@ -30,6 +30,11 @@
     <h3>Released Date</h3>
     <p>{{released}}</p>
 
+    <h3>Publisher</h3>
+    {{#each publishers}}
+    <p>{{name}}</p>
+    {{/each}}
+
     <form action="/addGame/{{id}}" method="post">
     <button type ="submit">Add to Favorites</button>
     </form>

@@ -10,7 +10,8 @@ router.get("/details/:id", async(req, res, next) =>{
     try {
         const gameId = req.params.id;
         const game = await getOneGame(gameId);
-        const description = game.description;
+        console.log(game)
+        /* const description = game.description; */
         /* const metacritic = game.metacritic;
         if(metacritic ==='null' && metacritic === 0){
             return 0;
@@ -44,8 +45,19 @@ router.post('/addGame/:id', async (req, res, next) => {
 
     try {
         const favoriteGame = await getOneGame(gameId);
-        const{name, website} = favoriteGame;
-        const gameToAdd = await Game.create({title:name, game_URL:website})
+        const{name, website, genres, background_image, publishers, id, platform, rating, released_at} = favoriteGame;
+        const gameToAdd = await Game.create({
+            title:name, 
+            genre:genres, 
+            image:background_image, 
+            game_URL:website,
+            game_publisher:publishers,
+            apiId:id,
+            platform_game:platform,
+            game_rating:rating,
+            game_release_date:released_at
+
+        })
         await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
         res.redirect('/profile');
     } catch (error) {

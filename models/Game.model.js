@@ -1,8 +1,9 @@
 const {Schema, model} = require('mongoose')
 
 const gameSchema = new Schema ({
+    apiId:String,
     title: String, 
-    genre: String, 
+    genre: [Object], 
     platform: String, 
     publisher: String, 
     description: String, 
