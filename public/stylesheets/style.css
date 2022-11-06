@@ -1,10 +1,16 @@
+
 *{
-  margin: 0
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  
 }
 
 body {
   /* padding: 50px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+ 
 }
 
 a {
@@ -19,7 +25,7 @@ nav{
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: aqua;
+  background-color: #1b2141;
   padding: 1vh;
 }
 
@@ -31,3 +37,4 @@ nav img {
   display: flex;
   flex-wrap: wrap;
 }
+
