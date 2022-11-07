@@ -29,6 +29,13 @@
   padding:1vh 1vw;
 }
 
+.page-btn-no-worky:hover{
+  background-color: red;
+  color: #050e2d;
+  box-shadow: 0 0 10px red;
+  cursor: not-allowed;
+}
+
 .card{
   margin: 3vh;
   padding: 0;
