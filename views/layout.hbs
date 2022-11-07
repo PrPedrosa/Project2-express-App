@@ -12,14 +12,14 @@
 
   <body>
     <nav>
-      <a href="/"><img src="/images/pic_6-removebg-preview.png" alt="logo"></a>
-      <div class ="navigation-bar">
-      <li><a href="/auth/signup">Sign Up</a></li>
-      <li><a href="/auth/login">Log In</a></li>
-      <li><a href="/profile">{{username}} Profile</a></li>
+      <a href="/"><img class="logo" src="/images/pic_6-removebg-preview.png" alt="logo"></a>
+      <ul class ="navigation-bar">
+      <li><a class ="navigation-bar-li"href="/auth/signup">Sign Up</a></li>
+      <li><a class ="navigation-bar-li"href="/auth/login">Log In</a></li>
+      <li><a class ="navigation-bar-li"href="/profile">{{username}} Profile</a></li>
 
       <form action="/search" method="post">
-        <input type="text" name="search" id="search" placeholder="Search Games">
+        <input type="text" name="game" id="search" placeholder="Search Games">
         <button type="submit">Search</button>
       </form>
     </nav>
