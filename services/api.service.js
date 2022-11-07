@@ -15,18 +15,19 @@ const axios = require("axios");
 let allGenres = "action,adventure,shooter,strategy,indie,role-playing-games-rpg,casual,simulation,puzzle,arcade,platformer,racing,massively-multiplayer,sports,fighting,family,board-games,educational,card"
 
 
-const searchGames=(gameName)=> {
-    let getAllGame = {
+const searchGames=(gameName, page = 1)=> {
+    let getAllGames = {
       method: "GET",
-      url: `https://api.rawg.io/api/games?key=91126f5a9acd457aa8ad4ce73cd3a59f&search=${gameName}&page_size=30`,
+      url: `https://api.rawg.io/api/games?key=91126f5a9acd457aa8ad4ce73cd3a59f&search=${gameName}&search_precise=true&page_size=10&page=${page}`,
   /*     headers: {
         key: process.env.API_KEY
       }, */
     };
-    return axios.request(getAllGame).then(function (response) {
-      const game = response.data;
-      return game;
-    });
+    return axios.request(getAllGames).then(function (response) {
+      const games = response.data;
+      return {games, page, gameName};
+    })
+    .catch(error => console.log(error))
   }
 
   

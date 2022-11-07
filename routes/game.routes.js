@@ -3,8 +3,9 @@ const Game = require('../models/Game.model');
 const getGames = require('../services/api.service');
 const getOneGame = require('../services/getOneGame');
 const User = require('../models/User.model');
+const axios = require("axios");
 
-
+//get game details
 
 router.get("/details/:id", async(req, res, next) =>{
     try {
@@ -25,19 +26,46 @@ router.get("/details/:id", async(req, res, next) =>{
     
 })
 
+//search games
 
 router.post("/search", async (req, res, next) => {
     const searchTerm = req.body.game;
     try {
         const apiResponse = await getGames(searchTerm);
-        const games = apiResponse.results
+        const games = apiResponse.games.results
+        const page = apiResponse.page
+        /* const state = {next: apiResponse.next, previous: apiResponse.previous} */
    
-        res.render("games/game-list", {games});
+        res.render("games/game-list", {games, page, gameName: searchTerm});
     } catch (error) {
         console.log(error)
         next(error);
     }
 })
+
+//pagination on search games
+
+router.post("/search/page/:page/:gameName/:state", async (req, res, next) => {
+    let page = req.params.page;
+    let gameName = req.params.gameName;
+    let {state} = req.params;
+    if(state === "next") page = +(page) +1;
+    else page = +(page) -1
+
+    try {
+        const apiResponse = await getGames(gameName, page);
+        const games = apiResponse.games.results
+        page = apiResponse.page
+   
+        res.render("games/game-list", {games, page, gameName});
+    } catch (error) {
+        console.log(error)
+        //check axios error
+        next(error);
+    }
+})
+
+//create games
 
 router.post('/addGame/:id', async (req, res, next) => {
     const gameId = req.params.id;
