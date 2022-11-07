@@ -12,13 +12,6 @@ router.get("/details/:id", async(req, res, next) =>{
         const gameId = req.params.id;
         const game = await getOneGame(gameId);
         console.log(game)
-        /* const description = game.description; */
-        /* const metacritic = game.metacritic;
-        if(metacritic ==='null' && metacritic === 0){
-            return 0;
-        } */
-        /* console.log(description)
-        const bestDescription = description.substring(3, description.length - 3) */
         res.render("games/game-details", game);
     } catch (error) {
        console.log(error); 
@@ -29,14 +22,16 @@ router.get("/details/:id", async(req, res, next) =>{
 //search games
 
 router.post("/search", async (req, res, next) => {
-    const searchTerm = req.body.game;
+    const gameName = req.body.game;
     try {
-        const apiResponse = await getGames(searchTerm);
+        const apiResponse = await getGames(gameName);
         const games = apiResponse.games.results
+        const numOfGames = apiResponse.games.count
+        const numOfPages = Math.ceil(numOfGames/10);
         const page = apiResponse.page
-        /* const state = {next: apiResponse.next, previous: apiResponse.previous} */
+        /* const displayedGames = page*10 */
    
-        res.render("games/game-list", {games, page, gameName: searchTerm});
+        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages});
     } catch (error) {
         console.log(error)
         next(error);
@@ -45,7 +40,7 @@ router.post("/search", async (req, res, next) => {
 
 //pagination on search games
 
-router.post("/search/page/:page/:gameName/:state", async (req, res, next) => {
+router.post("/search/:page/:gameName/:state", async (req, res, next) => {
     let page = req.params.page;
     let gameName = req.params.gameName;
     let {state} = req.params;
@@ -55,12 +50,16 @@ router.post("/search/page/:page/:gameName/:state", async (req, res, next) => {
     try {
         const apiResponse = await getGames(gameName, page);
         const games = apiResponse.games.results
+        const numOfGames = apiResponse.games.count
         page = apiResponse.page
+        const numOfPages = Math.ceil(numOfGames/9);
+
+        
    
-        res.render("games/game-list", {games, page, gameName});
+        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages});
     } catch (error) {
-        console.log(error)
-        //check axios error
+        console.log(error);
+        /* if(error.status === 404) res.redirect("/")   how to?????*/
         next(error);
     }
 })
@@ -83,9 +82,11 @@ router.post('/addGame/:id', async (req, res, next) => {
             apiId:id,
             platform_game:platform,
             game_rating:rating,
-            game_release_date:released_at
+            game_release_date:released_at,
+            user_created_game: true
 
         })
+
         await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
         res.redirect('/profile');
     } catch (error) {

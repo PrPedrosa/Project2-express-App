@@ -1,0 +1,32 @@
+.page-btn-div{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-btn{
+  text-decoration: none;
+  background: black;
+  font-family: 'Poppins', sans-serif;
+  color: #BABFCA;
+  margin: 1vh 1vh;
+  padding:0.5vh 0.5vw;
+  border-radius: 10px
+}
+
+.page-btn:hover{
+  background: #3E7797 ;
+  color: #050e2d;
+  box-shadow: 0 0 10px #3E7797;
+}
+
+.page-btn-div p{
+  color: white;
+  margin: 1vh 1vh;
+  padding:1vh 1vw;
+}
+
+.game-list-card{
+  margin: 1vh;
+}

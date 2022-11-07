@@ -18,7 +18,7 @@ let allGenres = "action,adventure,shooter,strategy,indie,role-playing-games-rpg,
 const searchGames=(gameName, page = 1)=> {
     let getAllGames = {
       method: "GET",
-      url: `https://api.rawg.io/api/games?key=91126f5a9acd457aa8ad4ce73cd3a59f&search=${gameName}&search_precise=true&page_size=10&page=${page}`,
+      url: `https://api.rawg.io/api/games?key=91126f5a9acd457aa8ad4ce73cd3a59f&search=${gameName}&search_precise=true&page_size=9&page=${page}`,
   /*     headers: {
         key: process.env.API_KEY
       }, */
