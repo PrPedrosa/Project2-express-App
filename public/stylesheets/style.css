@@ -5,16 +5,19 @@
   box-sizing: border-box;
   
 }
-
+/* 1b2141 */
 body {
   /* padding: 50px; */
   font: 17px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #1b2141;
- 
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,86,121,1) 76%, rgba(0,212,255,1) 100%);
+  
 }
 
 .navigation{
-  background-color: #202A5A;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,86,121,1) 76%, rgba(0,212,255,1) 100%);
+  
 }
 .navbar-nav{
   display: flex;
@@ -120,8 +123,22 @@ body {
  
 }
 .carousel-inner{
-  box-shadow: 20px 20px 100px #90ECF4;
+  box-shadow: 20px 20px 30px rgba(2,0,36,1);
 }
+
+.assasins_image{
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 35%;
+  
+}
+
+
+#nurse{
+  z-index: 1;
+}
+
 
 @media (max-width:400px) {
  
