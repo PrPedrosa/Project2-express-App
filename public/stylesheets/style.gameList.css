@@ -27,6 +27,32 @@
   padding:1vh 1vw;
 }
 
-.game-list-card{
+.card{
+  margin: 3vh;
+  padding: 0;
+  background-color: #050e2d;
+  border: 2px solid #BABFCA;
+  box-shadow: 0 0 0 0 10px#050e2d;
+}
+
+.card:hover{
   margin: 1vh;
+}
+
+.card-title{
+  color: #BABFCA;
+}
+
+.card-text{
+  color: #BABFCA;
+}
+
+hr{
+  border-bottom: 2px solid white;
+}
+
+.card a{
+  position: relative;
+  bottom: 0%;
+  text-align: center;
 }

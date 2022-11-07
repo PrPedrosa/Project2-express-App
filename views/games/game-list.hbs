@@ -26,16 +26,19 @@
   {{/each}} --}}
   <div class="row justify-content-around">
   {{#each games}}
-  <div class="card game-list-card" style="width: 18rem;">
+  <div class="card" style="width: 18rem;">
   <img src={{background_image}} class="card-img-top" alt="..." style="max-height: 10rem;">
   <div class="card-body">
     <h5 class="card-title">{{name}}</h5>
-    <p class="card-text">{{genres.0.name}}</p>
+    <hr>
     {{#if genres.1.name}}
-    <p class="card-text">{{genres.1.name}}</p>
+    <p class="card-text">{{genres.0.name}} || {{genres.1.name}}</p>
     {{/if}}
-    <a href="/details/{{id}}">Go to details</a>
+    {{#unless genres.1.name}}
+    <p class="card-text">{{genres.0.name}}</p>
+    {{/unless}}
   </div>
+    <a href="/details/{{id}}" class="page-btn">Go to details</a>
   </div>
   {{/each}}
 </div>

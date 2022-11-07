@@ -3,7 +3,7 @@ const Game = require('../models/Game.model');
 const getGames = require('../services/api.service');
 const getOneGame = require('../services/getOneGame');
 const User = require('../models/User.model');
-const axios = require("axios");
+/* const axios = require("axios") */;
 
 //get game details
 
