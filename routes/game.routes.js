@@ -39,7 +39,7 @@ router.post("/search", async (req, res, next) => {
 })
 
 //pagination on search games
-
+//error when searching without gamename
 router.post("/search/:page/:gameName/:state", async (req, res, next) => {
     let page = req.params.page;
     let gameName = req.params.gameName;
