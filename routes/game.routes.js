@@ -120,8 +120,9 @@ router.post('/bestGames/:genres', async (req, res, next) => {
 
     try {
     const apiResponse = await getBestGames(genres);
-    console.log(apiResponse);
-    res.render('games/best-games');
+    const games = apiResponse.results;
+    console.log(games);
+    res.render('games/best-games', {games});
     } catch (error) {
         console.log(error);
         next(error)
