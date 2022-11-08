@@ -23,15 +23,17 @@ router.get("/details/:id", async(req, res, next) =>{
 
 router.post("/search", async (req, res, next) => {
     const gameName = req.body.game;
+    let isFirstPage = true;
+    let isLastPage = false;
     try {
         const apiResponse = await getGames(gameName);
         const games = apiResponse.games.results
         const numOfGames = apiResponse.games.count
-        const numOfPages = Math.ceil(numOfGames/10);
+        const numOfPages = Math.ceil(numOfGames/9);
         const page = apiResponse.page
         /* const displayedGames = page*10 */
    
-        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages});
+        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages, isFirstPage, isLastPage});
     } catch (error) {
         console.log(error)
         next(error);
@@ -40,12 +42,14 @@ router.post("/search", async (req, res, next) => {
 
 //pagination on search games
 //error when searching without gamename
-router.post("/search/:page/:gameName/:state", async (req, res, next) => {
+router.post("/search/:page/:state/:gameName?", async (req, res, next) => {
     let page = req.params.page;
     let gameName = req.params.gameName;
     let {state} = req.params;
     if(state === "next") page = +(page) +1;
     else page = +(page) -1
+
+    
 
     try {
         const apiResponse = await getGames(gameName, page);
@@ -53,13 +57,19 @@ router.post("/search/:page/:gameName/:state", async (req, res, next) => {
         const numOfGames = apiResponse.games.count
         page = apiResponse.page
         const numOfPages = Math.ceil(numOfGames/9);
-
         
-   
-        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages});
+        let isFirstPage;
+        if(page > 1) isFirstPage = false;
+        else isFirstPage = true;
+
+        let isLastPage;
+        if(page < numOfPages) isLastPage = false;
+        else isLastPage = true;
+        
+        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages, isFirstPage, isLastPage});
     } catch (error) {
         console.log(error);
-        /* if(error.status === 404) res.redirect("/")   how to?????*/
+        /* if(error.status === 404) res.redirect("/")   how to catch api error??????*/
         next(error);
     }
 })
