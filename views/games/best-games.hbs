@@ -1,3 +1,5 @@
+<h1 class="best_game_title">Best {{bigGenres}} Games of 2022</h1>
+
 <div class="best_games_buttons">
 <form action="/bestGames/action" method="post">
 <button type="submit" class="page-btn">Action</button>
@@ -72,6 +74,7 @@
     {{#unless genres.1.name}}
     <p class="card-text">{{genres.0.name}}</p>
     {{/unless}}
+    <p class="card-text">Rating: {{metacritic}}</p>
   </div>
     <a href="/details/{{id}}" class="page-btn">Go to details</a>
   </div>

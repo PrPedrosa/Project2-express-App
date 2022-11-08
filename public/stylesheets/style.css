@@ -212,8 +212,10 @@ body {
 .dropdown{
   background: none;
 }
-
-
+.best_game_title{
+  text-align: center;
+  margin:4vh;
+}
 
 
 

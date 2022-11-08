@@ -4,6 +4,8 @@ const getGames = require('../services/api.service');
 const getOneGame = require('../services/getOneGame');
 const User = require('../models/User.model');
 const getBestGames = require('../services/bestGames');
+const capitalize = require("../utils/capitalize");
+const getFreeGames = require("../services/freeGames");
 /* const axios = require("axios") */;
 
 //get game details
@@ -11,7 +13,7 @@ const getBestGames = require('../services/bestGames');
 router.get("/details/:id", async(req, res, next) =>{
     try {
         const gameId = req.params.id;
-        console.log(typeof gameId)
+
         if(gameId.length < 7){
             const game = await getOneGame(gameId);
             /* console.log(game) */
@@ -121,7 +123,10 @@ router.post('/addGame/:id', async (req, res, next) => {
 
 router.get("/best-games", async (req, res, next) => {
     try {
-        res.render("games/best-games");
+        const apiResponse = await getBestGames();
+        const games = apiResponse.results;
+        console.log(games);
+        res.render("games/best-games", {games});
     } catch (error) {
         console.log(error);
         next(error);
@@ -130,12 +135,14 @@ router.get("/best-games", async (req, res, next) => {
 
 router.post('/bestGames/:genres', async (req, res, next) => {
     let genres = req.params.genres;
+    let bigGenres = capitalize(genres)
+    //do good rpg genre
 
     try {
     const apiResponse = await getBestGames(genres);
     const games = apiResponse.results;
     console.log(games);
-    res.render('games/best-games', {games});
+    res.render('games/best-games', {games, bigGenres});
     } catch (error) {
         console.log(error);
         next(error)
@@ -155,6 +162,39 @@ router.get("/user-created-games", async (req, res, next) => {
     }
 })
 
+//get free games
+
+router.get("/free-games", (req, res, next) => res.render('games/free-games-list'))
+
+router.post("/free-games", async(req, res, next) => {
+    const searchTerm = req.body.searchTerm;
+    try {
+        const allFreeGames = await getFreeGames();
+        let gamesArr = [];
+        allFreeGames.forEach(game =>{
+        
+            let gameName = game.title.toLowerCase();
+            if(gameName.includes(searchTerm)) gamesArr.push(game);
+        })
+        console.log(gamesArr)
+        res.render('games/free-games-list', {gamesArr})
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+router.get('/details/free-game/:id', async (req, res, next) =>{
+    const gameId = req.params.id;
+    try {
+        const freeGame = await getFreeGames(gameId);
+        console.log(freeGame)
+        res.render('games/free-games-details', freeGame)
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
 
 module.exports = router;
 
