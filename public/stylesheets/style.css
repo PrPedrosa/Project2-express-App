@@ -188,10 +188,13 @@ body {
 .like_button{
   border: none;
   background: none;
-  
-  
 }
 
+.best_games_buttons{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 @media (max-width:400px) {
  
