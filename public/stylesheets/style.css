@@ -134,7 +134,6 @@ body {
   
 }
 
-
 #nurse{
   z-index: 1;
 }
@@ -196,8 +195,27 @@ body {
   justify-content: center;
 }
 .nav-link-li{
-  text-decoration: none;
+  text-decoration: dashed;
+  color:#050e2d;
 }
+.dropdowns{
+  background: none;
+  color: #90ECF4;
+  border: none;
+}
+.dropdowns:hover{
+  background: none;
+}
+.dropdown-menu{
+  background-color:#3E7797;
+}
+.dropdown{
+  background: none;
+}
+
+
+
+
 
 @media (max-width:400px) {
  
