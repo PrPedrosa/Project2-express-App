@@ -11,7 +11,6 @@ body {
   font: 17px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,86,121,1) 76%, rgba(0,212,255,1) 100%);
-  
 }
 
 .navigation{
@@ -95,6 +94,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5vh;
 }
 
 .main_text{

@@ -8,6 +8,7 @@
 
 .page-btn{
   text-decoration: none;
+  border: none;
   background: black;
   font-family: 'Poppins', sans-serif;
   color: #BABFCA;
@@ -141,11 +142,69 @@ textarea{
   margin: 1vh;
 }
 
+.profile-pics-inputs{
+  margin-bottom: 5vh;
+}
+
 .radio-inputs{
   width: 20vh;
   height: 4vh;
   margin: 1vh;
 }
 
+.footer{
+  position:sticky;
+  bottom: 0vh;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  width: 100vw;
+  height: 6vh;
+  background-color: rgba(2,0,36,1);
+}
 
+.footer p{
+  margin: 0 1vh;
+  color: #90ECF4;
+  font-family: "Poppins"
+}
 
+.profile-cards-btns{
+  display: flex;
+}
+
+.delete-btn:hover{
+  background-color: red;
+}
+
+#profile-name{
+  color: #90ECF4;
+  padding-left: 7vh;
+  margin: 0;
+}
+
+.profile-functions{
+  padding-left: 5vh;
+}
+
+.profile-pic-edit-btn{
+  padding-left: 5vh;
+}
+
+.delete-acc-btn:hover{
+  background-color: red;
+}
+
+.delete-acc-btn:hover::after{
+  content: "Delete Account :(";
+}
+
+#my-games-title{
+  color: #90ECF4;
+  text-align: center;
+}
+
+#delete-acc-form{
+  display: inline;
+  padding-left: 90vh;
+}

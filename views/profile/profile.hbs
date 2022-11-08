@@ -1,32 +1,55 @@
 <div id="user-profile">
+
+<div class="profile-pic-edit-btn">
+<h2 id="profile-name">{{username}}</h2>
 <img src={{profilePicture}} alt="profilepic" class="profile-pic">
-<a href="/edit-profile">Edit profile</a>
-<h2>{{username}} profile</h2>
-
-
-{{#each favoriteGames}}
-<p>{{title}}</p>
-<img src="{{image}}" alt="game Image" width="400px">
-
-{{#if genre.1.name}}
-<p >{{genre.0.name}} || {{genre.1.name}}</p>
-{{/if}}
-
-{{#unless genre.1.name}}
-<p >{{genre.0.name}}</p>
-{{/unless}}
-
-<a href="/details/{{apiId}}">See details</a>
-
-
-<form action="/deleteFavGame/{{_id}}" method="post">
-<button type="submit">Delete Game</button>
-</form>
-{{/each}}
-<a href="/create-game">Add Game</a>
-<a href="/auth/logout">Log Out</a>
-
-<form action="/profile/delete/{{_id}}" method="post">
-  <button type="submit">Delete account</button>
+<a href="/edit-profile" class="page-btn">Edit profile</a>
+<form action="/profile/delete/{{_id}}" method="post" id="delete-acc-form">
+  <button type="submit" class="page-btn delete-acc-btn">...</button>
 </form>
 </div>
+
+<div class="profile-functions">
+
+<a href="/create-game" class="page-btn">Add Game</a>
+<form action="/auth/logout" method="get">
+  <button type="submit" class="page-btn">Log Out</button>
+</form>
+<br>
+<br>
+<br>
+{{!-- <form action="/profile/delete/{{_id}}" method="post">
+  <button type="submit" class="page-btn delete-acc-btn">...</button>
+</form> --}}
+</div>
+
+</div>
+
+
+<div class="container">
+  <h2 id="my-games-title">My Games</h2>
+  <div class="row justify-content-around">
+  {{#each favoriteGames}}
+  <div class="card" style="width: 18rem;">
+  <img src={{image}} class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <hr>
+    {{#if genre.1.name}}
+    <p class="card-text">{{genre.0.name}} || {{genre.1.name}}</p>
+    {{/if}}
+    {{#unless genre.1.name}}
+    <p class="card-text">{{genre.0.name}}</p>
+    {{/unless}}
+  </div>
+    <div class="profile-cards-btns">
+    <a href="/details/{{apiId}}" class="page-btn">Go to details</a>
+    <form action="/deleteFavGame/{{_id}}" method="post">
+      <button type="submit" class="page-btn delete-btn">Delete Game</button>
+    </form>
+    </div>
+  </div>
+  {{/each}}
+</div>
+</div>
+
