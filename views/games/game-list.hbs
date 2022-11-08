@@ -30,7 +30,12 @@
   <div class="row justify-content-around">
   {{#each games}}
   <div class="card" style="width: 18rem;">
+  {{#if background_image}}
   <img src={{background_image}} class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/if}}
+  {{#unless background_image}}
+  <img src="/images/404.png" class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/unless}}
   <div class="card-body">
     <h5 class="card-title">{{name}}</h5>
     <hr>

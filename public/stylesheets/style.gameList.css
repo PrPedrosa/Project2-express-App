@@ -202,9 +202,9 @@ textarea{
 #my-games-title{
   color: #90ECF4;
   text-align: center;
+  margin-bottom: 2vh;
 }
 
 #delete-acc-form{
   display: inline;
-  padding-left: 90vh;
 }
