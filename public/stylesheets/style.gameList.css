@@ -208,3 +208,12 @@ textarea{
 #delete-acc-form{
   display: inline;
 }
+
+.profile-pics-div{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.inputs-box{
+  border: 1px solid black;
+}

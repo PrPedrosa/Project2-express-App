@@ -42,9 +42,10 @@ router.post("/deleteFavGame/:id", async (req, res, next) => {
     const userId = req.session.currentUser._id
 
     try {
-
         await User.findByIdAndUpdate(userId, {$pull: {favoriteGames: gameId}});
-        res.redirect("/profile")
+        await Game.findByIdAndRemove(gameId);
+        res.redirect("/profile");
+        
     } catch (error) {
         console.log(error)
         next(error)
