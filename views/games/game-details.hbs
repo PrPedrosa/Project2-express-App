@@ -3,7 +3,12 @@
     <h2>{{name}}</h2>
 
     <div class ="arrange_image">
-    <img class="image_details" src ={{background_image}} width="600px">
+    {{#if background_image}}
+    <img class="image_details" src={{background_image}} width="600px">
+    {{/if}}
+    {{#unless background_image}}
+    <img class="image_details" src="" width="600px">
+    {{/unless}}
      <div class ="main_publisher">
      <div class="publisher"><b>Publisher: </b>
      {{#each publishers}}
