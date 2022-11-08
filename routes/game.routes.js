@@ -3,6 +3,7 @@ const Game = require('../models/Game.model');
 const getGames = require('../services/api.service');
 const getOneGame = require('../services/getOneGame');
 const User = require('../models/User.model');
+const getBestGames = require('../services/bestGames');
 /* const axios = require("axios") */;
 
 //get game details
@@ -104,6 +105,29 @@ router.post('/addGame/:id', async (req, res, next) => {
     }
     
 })
+
+router.get("/best-games", async (req, res, next) => {
+    try {
+        res.render("games/best-games");
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+})
+
+router.post('/bestGames/:genres', async (req, res, next) => {
+    let genres = req.params.genres;
+
+    try {
+    const apiResponse = await getBestGames(genres);
+    console.log(apiResponse);
+    res.render('games/best-games');
+    } catch (error) {
+        console.log(error);
+        next(error)
+    }
+})
+
 
 
 

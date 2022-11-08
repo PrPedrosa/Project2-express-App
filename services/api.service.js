@@ -36,6 +36,7 @@ const searchGames=(gameName, page = 1)=> {
     .catch(error => console.log(error))
   }
 
+
   
 
 module.exports= searchGames;
