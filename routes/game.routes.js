@@ -32,6 +32,8 @@ router.post("/search", async (req, res, next) => {
         const numOfPages = Math.ceil(numOfGames/9);
         const page = apiResponse.page
         /* const displayedGames = page*10 */
+
+        //for search with filters see req.query.filter??
    
         res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages, isFirstPage, isLastPage});
     } catch (error) {
@@ -41,7 +43,6 @@ router.post("/search", async (req, res, next) => {
 })
 
 //pagination on search games
-//error when searching without gamename
 router.post("/search/:page/:state/:gameName?", async (req, res, next) => {
     let page = req.params.page;
     let gameName = req.params.gameName;
