@@ -1,23 +1,28 @@
+    <div class="main_details">
 
-
-<div>
+    <div class ="first_details">
     <h3>Game title:{{name}}</h3>
     <img src ={{background_image}} width="500px">
+    </div>
+
+    <div class="details">
+
+    <h3>
+    Genre: {{#each genres}}
+    {{name}}
+    {{/each}}
+    </h3>
     
 
-    <h3>Genre</h3>
-    {{#each genres}}
-    <p>{{name}}</p>
+
+    <h3>
+    Platform: {{#each platforms}}
+    {{platform.name}}
     {{/each}}
 
-
-    <h3>Platform</h3>
-    {{#each platforms}}
-    <p>{{platform.name}}</p>
-    {{/each}}
-
-    <h3>Description: </h3>
-    <p>{{{description}}}</p>
+    </h3>
+    
+    <h3>Description: {{{description}}}</h3>
 
      {{#if website}}
     <a target="_blank" href="{{website}}">Website</a>
@@ -38,8 +43,9 @@
     <form action="/addGame/{{id}}" method="post">
     <button type ="submit">Add to Favorites</button>
     </form>
-
-
-    
+    </div>
 
 </div>
+    
+
+

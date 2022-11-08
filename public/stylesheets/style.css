@@ -139,6 +139,19 @@ body {
   z-index: 1;
 }
 
+.main_details{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+.details{
+  padding-left: 1%;
+}
+.first_details{
+  position: center;
+}
+
 
 @media (max-width:400px) {
  
