@@ -61,7 +61,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
       // Create a user and save it in the database
-      return User.create({ username, email, password: hashedPassword });
+      return User.create({ username, email, password: hashedPassword, profilePicture: "images/osrs_bot-removebg-preview.png" });
     })
     .then((user) => {
       res.redirect("/auth/login");

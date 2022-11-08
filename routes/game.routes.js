@@ -92,9 +92,7 @@ router.post('/addGame/:id', async (req, res, next) => {
             apiId:id,
             platform_game:platform,
             game_rating:rating,
-            game_release_date:released_at,
-            user_created_game: true
-
+            game_release_date:released_at
         })
 
         await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})

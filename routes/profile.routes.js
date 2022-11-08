@@ -27,6 +27,7 @@ router.get('/profile', isLoggedIn, async (req, res, next) =>{
 router.post("/profile/delete/:id", async (req, res, next) =>{
     const {id} = req.params
     try {
+        req.session.destroy();
         await User.findByIdAndRemove(id);
         res.redirect("/");
     } catch (error) {
@@ -41,9 +42,27 @@ router.post("/deleteFavGame/:id", async (req, res, next) => {
     const userId = req.session.currentUser._id
 
     try {
-        /* const gameToRemove = await Game.findById(gameId) */
 
         await User.findByIdAndUpdate(userId, {$pull: {favoriteGames: gameId}});
+        res.redirect("/profile")
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
+// edit profile picture
+
+router.get("/edit-profile", (req, res, next) => res.render("profile/edit-profile"))
+
+router.post("/edit-profile", async (req, res, next) =>{
+    const newProfilePicture = req.body.pic
+    console.log(req.body.pic)
+    const userId = req.session.currentUser._id
+    console.log(req.session.currentUser)
+
+    try {
+        await User.findByIdAndUpdate(userId, {profilePicture: newProfilePicture})
         res.redirect("/profile")
     } catch (error) {
         console.log(error)
@@ -67,7 +86,7 @@ router.post("/create-game", fileUploader.single('image'), async(req, res, next) 
             imageUrl = 'https://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG';
           }
         
-        const createdGame = await Game.create({title, genre, platform, publisher, description, game_URL, image: imageUrl});
+        const createdGame = await Game.create({title, genre, platform, publisher, description, game_URL, image: imageUrl, user_created_game: true});
         await User.findByIdAndUpdate(user._id, {$push: {favoriteGames: createdGame}});
         res.redirect("/profile");
 
