@@ -140,16 +140,56 @@ body {
 }
 
 .main_details{
+  display: flex; 
+  flex-direction: column;  
+  margin:auto;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  padding-left: 10%;
+  color:#90ECF4;
+  padding-right: 10%;
+}
+.game_name{
+  font-size: 2em;
+  color:#fff;
+}
+.game_genre{
+  color:#90ECF4;
+  font-size: 1.4em;
+  padding-top: 2%;
+  
+}
+.platforms,.description,.submit_form, .rating{
+  padding-top: 5%;
+  color:#90ECF4;
+  
+}
+.description{
+  text-align: justify;
+
+}
+.website,.publisher,.release_date{
+  text-decoration: none;
+  font-size: 1.2em;
+  padding-top: 5%;
+  padding-bottom: 4%;
+  
+}
+.arrange_image{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
 }
-.details{
-  padding-left: 1%;
+.main_publisher{
+  display: flex;
+  flex-direction: column;
+  padding-left: 3%;
 }
-.first_details{
-  position: center;
+.like_button_image{
+  width: 2em;
+}
+.like_button{
+  border: none;
+  background: none;
+  
+  
 }
 
 

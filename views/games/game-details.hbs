@@ -1,51 +1,50 @@
+    
     <div class="main_details">
+    <h2>{{name}}</h2>
 
-    <div class ="first_details">
-    <h3>Game title:{{name}}</h3>
-    <img src ={{background_image}} width="500px">
-    </div>
-
-    <div class="details">
-
-    <h3>
-    Genre: {{#each genres}}
-    {{name}}
-    {{/each}}
-    </h3>
-    
-
-
-    <h3>
-    Platform: {{#each platforms}}
-    {{platform.name}}
-    {{/each}}
-
-    </h3>
-    
-    <h3>Description: {{{description}}}</h3>
-
+    <div class ="arrange_image">
+    <img class="image_details" src ={{background_image}} width="600px">
+     <div class ="main_publisher">
+     <div class="publisher"><b>Publisher: </b>
+     {{#each publishers}}
+     {{name}}
+     {{/each}}
+     </div>
+     <form action="/addGame/{{id}}" method="post">
+     <div class="release_date"><b>Released Date</b> <br>{{released}}</div>
      {{#if website}}
-    <a target="_blank" href="{{website}}">Website</a>
+     <a class ="website" target="_blank" href="{{website}}"><b>Website</b></a>
      {{/if}}
 
     {{#if metacritic}}
-    <h3>Rating:{{metacritic}}</h3>
-    {{/if}}
+    <div class="rating"><b>Rating:</b>{{metacritic}}</h3>
+    {{/if}}</div>
+    <div class="submit_form">
+     <button class="like_button" type ="submit"><img class ="like_button_image"src="/images\logo2.png"></button>
+     <span><b>Add to favorites</b></span>
+     </div>
+     </form>
+     </div>
+     </div>
 
-    <h3>Released Date</h3>
-    <p>{{released}}</p>
-
-    <h3>Publisher</h3>
-    {{#each publishers}}
-    <p>{{name}}</p>
+    <div class="game_genre">{{#each genres}}
+    {{name}}
     {{/each}}
-
-    <form action="/addGame/{{id}}" method="post">
-    <button type ="submit">Add to Favorites</button>
-    </form>
     </div>
 
-</div>
+    <div class="platforms"><b>Available on</b><br>
+    {{#each platforms}}
+    {{platform.name}}
+    {{/each}}
+    </div>
+    
+    <div class="description">{{{description}}}</div>
+
+
+   
+    
+
+
     
 
 
