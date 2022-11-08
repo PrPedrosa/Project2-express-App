@@ -1,0 +1,42 @@
+<div class="main_details">
+    <h2>{{title}}</h2>
+
+    <div class ="arrange_image">
+    {{#if image}}
+    <img class="image_details" src={{image}} width="600px">
+    {{/if}}
+    {{#unless image}}
+    <img class="image_details" src="/images/404.png" width="600px">
+    {{/unless}}
+     <div class ="main_publisher">
+     <div class="publisher"><b>Publisher: {{publisher}}</b>
+     
+     </div>
+     <form action="/addGame/{{_id}}" method="post">
+     {{!-- <div class="release_date"><b>Released Date</b> <br>{{release_date}}</div> --}}
+     {{#if game_URL}}
+     <a class ="website" target="_blank" href="{{game_URL}}"><b>Website</b></a>
+     {{/if}}
+
+    {{#if metacritic}}
+    <div class="rating"><b>Rating:</b>{{metacritic}}</h3>
+    </div>
+    {{/if}}
+    <div class="submit_form">
+     <button class="like_button" type ="submit"><img class ="like_button_image"src="/images\logo2.png"></button>
+     <span><b>Add to favorites</b></span>
+     </div>
+     </form>
+     </div>
+     </div>
+
+    <div class="game_genre">
+    {{genre}}
+    </div>
+    
+
+    <div class="platforms"><b>Available on</b><br>
+    {{platform}}
+    </div>
+
+    <div class="description">{{{description}}}</div>

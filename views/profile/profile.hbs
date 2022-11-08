@@ -45,7 +45,12 @@
     {{/unless}}
   </div>
     <div class="profile-cards-btns">
+    {{#if apiId}}
     <a href="/details/{{apiId}}" class="page-btn">Go to details</a>
+    {{/if}}
+    {{#unless apiId}}
+    <a href="/details/{{_id}}" class="page-btn">Go to details</a>
+    {{/unless}}
     <form action="/deleteFavGame/{{_id}}" method="post">
       <button type="submit" class="page-btn delete-btn">Delete Game</button>
     </form>
