@@ -13,8 +13,6 @@ router.get('/profile', isLoggedIn, async (req, res, next) =>{
         const currentUserId = req.session.currentUser._id;
         /* currentUser.populate('favoriteGames'); */
         const currentUser = await User.findById(currentUserId).populate('favoriteGames');
-       /*  console.log(currentUser) */
-       /*  const userGames = currentUser.favoriteGames; */
         res.render('profile/profile', currentUser)
     } catch (error) {
         console.log(error);

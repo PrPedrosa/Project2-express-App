@@ -11,9 +11,15 @@ const getBestGames = require('../services/bestGames');
 router.get("/details/:id", async(req, res, next) =>{
     try {
         const gameId = req.params.id;
-        const game = await getOneGame(gameId);
-        console.log(game)
-        res.render("games/game-details", game);
+        console.log(typeof gameId)
+        if(gameId.length < 7){
+            const game = await getOneGame(gameId);
+            /* console.log(game) */
+            res.render("games/game-details", game);
+        } else{
+            const userGame = await Game.findById(gameId);
+            res.render("games/user-game-details", userGame);
+        }
     } catch (error) {
        console.log(error); 
     }
@@ -76,28 +82,33 @@ router.post("/search/:page/:state/:gameName?", async (req, res, next) => {
     }
 })
 
-//create games
+//add games to favorites
 
 router.post('/addGame/:id', async (req, res, next) => {
     const gameId = req.params.id;
     const currentUser = req.session.currentUser;
 
     try {
-        const favoriteGame = await getOneGame(gameId);
-        const{name, website, genres, background_image, publishers, id, platform, rating, released_at} = favoriteGame;
-        const gameToAdd = await Game.create({
-            title:name, 
-            genre:genres, 
-            image:background_image, 
-            game_URL:website,
-            game_publisher:publishers,
-            apiId:id,
-            platform_game:platform,
-            game_rating:rating,
-            game_release_date:released_at
-        })
+        if(gameId.length < 7){
 
-        await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
+            const favoriteGame = await getOneGame(gameId);
+            const{name, website, genres, background_image, publishers, id, platform, rating, released_at} = favoriteGame;
+            const gameToAdd = await Game.create({
+                title:name, 
+                genre:genres, 
+                image:background_image, 
+                game_URL:website,
+                game_publisher:publishers,
+                apiId:id,
+                platform_game:platform,
+                game_rating:rating,
+                game_release_date:released_at
+            })
+            await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
+        } else {
+            const userFavoritedGame = await Game.findById(gameId);
+            await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames: userFavoritedGame._id}})
+        }
         res.redirect('/profile');
     } catch (error) {
         console.log(error)
@@ -105,6 +116,8 @@ router.post('/addGame/:id', async (req, res, next) => {
     }
     
 })
+
+//get best games
 
 router.get("/best-games", async (req, res, next) => {
     try {
@@ -129,7 +142,18 @@ router.post('/bestGames/:genres', async (req, res, next) => {
     }
 })
 
+//get user games
 
+router.get("/user-created-games", async (req, res, next) => {
+    try {
+        const userGames = await Game.find({user_created_game: true});
+        console.log(userGames);
+        res.render("games/user-games", {userGames});
+    } catch (error) {
+        console.log(error);
+        next(error)
+    }
+})
 
 
 module.exports = router;

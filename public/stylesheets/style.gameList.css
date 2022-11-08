@@ -194,7 +194,7 @@ textarea{
 }
 
 .delete-acc-btn:hover{
-  background-color: red;
+  background-color: tomato;
   cursor: not-allowed;
 }
 
