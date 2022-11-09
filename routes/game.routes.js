@@ -25,6 +25,8 @@ router.get("/details/:id", async(req, res, next) =>{
             /* console.log(userGame) */
             res.render("games/user-game-details", userGame);
         }
+
+        
     } catch (error) {
        console.log(error); 
     }

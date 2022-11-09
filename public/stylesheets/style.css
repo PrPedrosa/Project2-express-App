@@ -9,14 +9,19 @@
 body {
   /* padding: 50px; */
   font: 17px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,86,121,1) 76%, rgba(0,212,255,1) 100%);
+  /* background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,86,121,1) 76%, rgba(0,212,255,1) 100%); */
+  background: rgb(4,5,9);
+  background: linear-gradient(90deg, rgba(4,5,9,1) 0%, rgba(30,110,206,1) 50%, rgba(182,130,90,1) 100%);
+
 }
 
 .navigation{
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,86,121,1) 76%, rgba(0,212,255,1) 100%);
-  
+  /* background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,86,121,1) 76%, rgba(0,212,255,1) 100%); */
+  background: rgb(4,5,9);
+  background: linear-gradient(90deg, rgba(4,5,9,1) 0%, rgba(30,110,206,1) 50%, rgba(182,130,90,1) 100%);
+
 }
 .navbar-nav{
   display: flex;
@@ -90,7 +95,7 @@ body {
 
 
 .home_page_body{
-  padding-top: 10%;
+  padding-top: 7%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,12 +110,14 @@ body {
   align-items: center;
   font-family: 'Poppins', sans-serif;
   color: #90ECF4;
+  padding-bottom: 10%;
   
 }
 
 #carouselExampleSlidesOnly{
   width: 40vw;
   height: 350px;
+  right: 5%;
 }
 
 .image_logo{
@@ -120,17 +127,18 @@ body {
 .carousel-item{
   border:1px solid;
   border-color:#90ECF4;
+  
  
 }
 .carousel-inner{
   box-shadow: 20px 20px 30px rgba(2,0,36,1);
 }
 
-.assasins_image{
+.tomb_raider{
   position: absolute;
   bottom: 0%;
   left: 0%;
-  width: 35%;
+  width: 45%;
   
 }
 
@@ -152,14 +160,15 @@ body {
   color:#fff;
 }
 .game_genre{
-  color:#90ECF4;
+  color:#fff;
   font-size: 1.4em;
   padding-top: 2%;
+  
   
 }
 .platforms,.description,.submit_form, .rating{
   padding-top: 5%;
-  color:#90ECF4;
+  color: #CEF2F8;
   
 }
 .description{
@@ -170,7 +179,8 @@ body {
   text-decoration: none;
   font-size: 1.2em;
   padding-top: 5%;
-  padding-bottom: 4%;
+  padding-bottom: 6%;
+  color:#CEF2F8;
   
 }
 .arrange_image{
@@ -215,6 +225,15 @@ body {
 .best_game_title{
   text-align: center;
   margin:4vh;
+}
+.image_details{
+  border: 2px solid #68767A;
+  border-radius: 5px;
+  box-shadow: 0 10px 50px #DAE4E7;
+}
+.game_name_details{
+  color:#CEF2F8;
+  
 }
 
 
