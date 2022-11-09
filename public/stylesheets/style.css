@@ -90,8 +90,6 @@ body {
   width: 2.2em;
   height: 2.2em;
   font-family: 'Poppins', sans-serif;
-  
-  
 }
 .search{
   font-family: 'Poppins', sans-serif;
@@ -103,7 +101,6 @@ body {
   border-radius: 5px;
   outline:none;
   border:none;
-
 }
 
 .nav-link {
@@ -155,8 +152,6 @@ body {
 .image_logo{
   width: 5vh;
 }
-
-
 .carousel-item{
   border:1px solid;
   border-color:#90ECF4;
@@ -201,12 +196,20 @@ body {
 }
 .platforms,.description,.submit_form, .rating{
   padding-top: 5%;
-  color: #CEF2F8;
   
 }
 .description{
   text-align: justify;
-
+  padding-bottom: 6vh;
+  color:#fff;
+}
+.details_bold{
+  color: rgb(246, 237, 233);
+  text-decoration: underline;
+}
+.website_bold{
+  color:#1712a9;
+  text-decoration: underline;
 }
 .website,.publisher,.release_date{
   text-decoration: none;
@@ -314,6 +317,16 @@ body {
     padding-top: 2vh;
     padding-left: 2vh;
    }
-  
+   .image_details{
+    width: 35vh;
+    height: 20vh;
+   }
+   .main_publisher{
+    display: flex;
+    flex-direction: column;
+    margin-top: 45%;
+    margin-left: -242px
+   }
+
 
 }
