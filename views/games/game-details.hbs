@@ -40,9 +40,16 @@
      </div>
 
     <div class="game_genre">
-    {{#each apigame.genres}}
-    {{name}}
-    {{/each}}
+    {{!-- {{#each apigame.genres}} --}}
+    {{#if apigame.genres.0.name}}
+    <span>{{apigame.genres.0.name}} ||</span>
+    {{/if}}
+
+    {{#if apigame.genres.1.name}}
+    <span>{{apigame.genres.1.name}}</span>
+    {{/if}}
+
+   {{!--  {{/each}} --}}
     </div>
     
 
