@@ -1,0 +1,31 @@
+<h1>Heloooooooooooo</h1>
+<form action="/free-games" method="post">
+<input type="text" name="searchTerm">
+<button type="submit">But</button>
+</form>
+
+<div class="container">
+  <div class="row justify-content-around">
+  {{#each gamesArr}}
+  <div class="card" style="width: 18rem;">
+  {{#if thumbnail}}
+  <img src={{thumbnail}} class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/if}}
+  {{#unless thumbnail}}
+  <img src="/images/404.png" class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/unless}}
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <hr>
+    {{!-- {{#if genres.1.name}}
+    <p class="card-text">{{genres.0.name}} || {{genres.1.name}}</p>
+    {{/if}}
+    {{#unless genres.1.name}} --}}
+    <p class="card-text">{{genre}}</p>
+    {{!-- {{/unless}} --}}
+  </div>
+    <a href="/details/free-game/{{id}}" class="page-btn">Go to details</a>
+  </div>
+  {{/each}}
+</div>
+</div>
