@@ -33,8 +33,14 @@ router.get("/details/:id", async(req, res, next) =>{
             else if(userFavorites.indexOf(game) === userFavorites.length -1){
                 return isGameOnFavorites = false
             }
-        })
+            })
             
+            /* let genresArr = apigame.genres;
+            let goodArr = genresArr.map(el => el.name)
+            let goodArrCopy = [...goodArr]
+            goodArrCopy.forEach((ele, i) => goodArr.splice(i, 0, "||"))
+            console.log(goodArr); */
+
             res.render("games/game-details", {apigame, isGameOnFavorites});
 
         
@@ -45,15 +51,16 @@ router.get("/details/:id", async(req, res, next) =>{
             let isUserGameOnFavorites;
 
             userFavorites.forEach(game =>{
-            if(game._id == userGame._id){
+            if(game.title == userGame.title){
                 return isUserGameOnFavorites = true
             }
             else if(userFavorites.indexOf(game) === userFavorites.length -1){
                 return isUserGameOnFavorites = false
             }
         })
+        console.log(isUserGameOnFavorites)
             
-            res.render("games/user-game-details", userGame);
+            res.render("games/user-game-details", {userGame, isUserGameOnFavorites});
         }
         
     } catch (error) {
