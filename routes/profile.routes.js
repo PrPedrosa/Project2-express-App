@@ -43,11 +43,13 @@ router.post("/deleteFavGame/:id", async (req, res, next) => {
 
     try {
         const gameToRemove = await Game.findById(gameId);
-
+        //this function makes the current user not be able to remove anothers user created game from the
+        //games database
+        //but allows him to remove the game from his favorites
         if(gameToRemove.creator !== req.session.currentUser.username && gameToRemove.user_created_game === true){
         await User.findByIdAndUpdate(userId, {$pull: {favoriteGames: gameId}});
         }
-
+        //this makes the creator be able to delete his own games from games database
         else {
         await User.findByIdAndUpdate(userId, {$pull: {favoriteGames: gameId}});
         await Game.findByIdAndRemove(gameId);

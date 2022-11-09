@@ -129,6 +129,8 @@ router.post('/addGame/:id', isLoggedIn, async (req, res, next) => {
 router.post("/addFreeGame/:id", isLoggedIn, async (req, res, next) =>{
     const freeGameId = req.params.id;
     const currentUser = req.session.currentUser;
+    const currentUserId = currentUser._id
+
     try {
         const freeGame = await getFreeGames(freeGameId);
         const {title, thumbnail, short_description, game_url, genre, platform, publisher, release_date, id} = freeGame;
@@ -145,8 +147,21 @@ router.post("/addFreeGame/:id", isLoggedIn, async (req, res, next) =>{
             free_game: true,
             regular_game: false
         })
-        await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
-        res.redirect("/profile");
+
+        //not getting duplicate free games on user profile
+        const userToCheck = await User.findById(currentUserId).populate("favoriteGames");
+        const userFavorites = userToCheck.favoriteGames;
+        userFavorites.forEach(async game =>{
+            if(game.apiId === gameToAdd.apiId){
+                res.redirect(`/details/free-game/${gameToAdd.apiId}`);
+                return;
+            }
+            else if(userFavorites.indexOf(game) === userFavorites.length -1){
+
+                await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
+                res.redirect(`/details/free-game/${gameToAdd.apiId}`);
+            }
+        })
     } catch (error) {
         console.log(error)
         next(error)
@@ -226,10 +241,29 @@ router.post("/free-games", async(req, res, next) => {
 
 router.get('/details/free-game/:id', async (req, res, next) =>{
     const gameId = req.params.id;
+    const currentUserId = req.session.currentUser._id;
     try {
+        const userToCheck = await User.findById(currentUserId).populate("favoriteGames");
+        const userFavorites = userToCheck.favoriteGames;
         const freeGame = await getFreeGames(gameId);
+        let isGameOnFavorites;
+
+
+        userFavorites.forEach(game =>{
+            if(game.apiId == freeGame.id){
+                return isGameOnFavorites = true
+            }
+            else if(userFavorites.indexOf(game) === userFavorites.length -1){
+                return isGameOnFavorites = false
+            }
+        })
+
+        console.log(isGameOnFavorites)
+
         console.log(freeGame)
-        res.render('games/free-games-details', freeGame)
+
+
+        res.render('games/free-games-details', {freeGame, isGameOnFavorites})
     } catch (error) {
         console.log(error)
         next(error)
