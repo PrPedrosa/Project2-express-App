@@ -157,7 +157,7 @@ textarea{
   position: fixed;
   bottom: 0vh;
   display: flex;
-  /* justify-content: center; */
+  justify-content: flex-end;
   align-items: center;
   width: 100vw;
   height: 6vh;
@@ -166,7 +166,7 @@ textarea{
 }
 
 .footer p{
-  margin: 0 1vh;
+  margin: 0 5vh;
   color: #90ECF4;
   font-family: "Poppins"
 }
@@ -244,3 +244,35 @@ textarea{
 .forms-p a {
   color: aqua;
 }
+
+#more-games-tab{
+  background: none;
+}
+
+#more-games-tab:hover{
+  background-color: #90ECF4;
+}
+
+.navbar-nav-li-more{
+  padding: 2vh;
+  text-align: center;
+  margin: 0.5vh;
+  border-radius: 10px;
+}
+
+.navbar-nav-li-more:hover{
+  background-color: #90ECF4;
+}
+
+.navbar-nav-li-more:hover .nav-link-li{
+  color:#050e2d;
+}
+
+.nav-link-li{
+  color:#90ECF4;
+}
+
+.nav-link-li:hover{
+  color:#050e2d;
+}
+
