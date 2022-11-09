@@ -161,7 +161,8 @@ textarea{
   align-items: center;
   width: 100vw;
   height: 6vh;
-  background-color: rgba(2,0,36,1);
+  background: rgb(33,32,115);
+  background: linear-gradient(90deg, rgba(33,32,115,0.8660057773109244) 100%, rgba(0,108,255,0.5270702030812324) 100%);
 }
 
 .footer p{
