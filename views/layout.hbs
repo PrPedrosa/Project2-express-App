@@ -35,10 +35,11 @@
             <li class="navbar-nav-li"><a class="nav-link-li" href="/free-games">Free Games</a></li>
           </ul>
         </li>
-        
+        {{#unless username}}
         <li class="navbar-nav-li"><a class="nav-link" href="/auth/signup">Sign Up</a></li>
         <li class="navbar-nav-li"> <a class="nav-link" href="/auth/login">Log In</a></li>
-        <li class="navbar-nav-li"><a class="nav-link" href="/profile">Profile</a></li>
+        {{/unless}}
+        <li class="navbar-nav-li"><a class="nav-link" href="/profile">My Profile</a></li>
         <div class ="search">
         <form action="/search" method="post">
         <input class="search_input" type="text" name="game" id="search" placeholder="Search Games">

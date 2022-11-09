@@ -6,7 +6,9 @@ const User = require('../models/User.model');
 const getBestGames = require('../services/bestGames');
 const capitalize = require("../utils/capitalize");
 const getFreeGames = require("../services/freeGames");
+const isLoggedIn = require("../middleware/isLoggedIn");
 /* const axios = require("axios") */;
+//GamingHub for name??
 
 //get game details
 
@@ -20,6 +22,7 @@ router.get("/details/:id", async(req, res, next) =>{
             res.render("games/game-details", game);
         } else{
             const userGame = await Game.findById(gameId);
+            /* console.log(userGame) */
             res.render("games/user-game-details", userGame);
         }
     } catch (error) {
@@ -40,7 +43,6 @@ router.post("/search", async (req, res, next) => {
         const numOfGames = apiResponse.games.count
         const numOfPages = Math.ceil(numOfGames/9);
         const page = apiResponse.page
-        /* const displayedGames = page*10 */
 
         //for search with filters see req.query.filter??
    
@@ -79,16 +81,16 @@ router.post("/search/:page/:state/:gameName?", async (req, res, next) => {
         res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages, isFirstPage, isLastPage});
     } catch (error) {
         console.log(error);
-        /* if(error.status === 404) res.redirect("/")   how to catch api error??????*/
         next(error);
     }
 })
 
-//add games to favorites
+//add games and userGames to favorites
 
-router.post('/addGame/:id', async (req, res, next) => {
+router.post('/addGame/:id', isLoggedIn, async (req, res, next) => {
     const gameId = req.params.id;
     const currentUser = req.session.currentUser;
+    const username = currentUser.username;
 
     try {
         if(gameId.length < 7){
@@ -108,8 +110,11 @@ router.post('/addGame/:id', async (req, res, next) => {
             })
             await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
         } else {
-            const userFavoritedGame = await Game.findById(gameId);
-            await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames: userFavoritedGame._id}})
+            const userCreatedFavoritedGame = await Game.findById(gameId);
+            await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames: userCreatedFavoritedGame._id}});
+            //likes
+            if(!(userCreatedFavoritedGame.likes.includes(username)))
+            await Game.findByIdAndUpdate(gameId, {$push:{likes: username}})
         }
         res.redirect('/profile');
     } catch (error) {
@@ -119,9 +124,38 @@ router.post('/addGame/:id', async (req, res, next) => {
     
 })
 
+//add free games to favorites
+
+router.post("/addFreeGame/:id", isLoggedIn, async (req, res, next) =>{
+    const freeGameId = req.params.id;
+    const currentUser = req.session.currentUser;
+    try {
+        const freeGame = await getFreeGames(freeGameId);
+        const {title, thumbnail, short_description, game_url, genre, platform, publisher, release_date, id} = freeGame;
+        const gameToAdd = await Game.create({
+            title: title, 
+            genre: genre, 
+            image: thumbnail, 
+            game_URL: game_url,
+            game_publisher: publisher,
+            apiId: id,
+            platform_game: platform,
+            game_release_date: release_date,
+            description: short_description,
+            free_game: true,
+            regular_game: false
+        })
+        await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
+        res.redirect("/profile");
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+})
+
 //get best games
 
-router.get("/best-games", async (req, res, next) => {
+router.get("/best-games", isLoggedIn, async (req, res, next) => {
     try {
         const apiResponse = await getBestGames();
         const games = apiResponse.results;
@@ -151,11 +185,15 @@ router.post('/bestGames/:genres', async (req, res, next) => {
 
 //get user games
 
-router.get("/user-created-games", async (req, res, next) => {
+router.get("/user-created-games", isLoggedIn, async (req, res, next) => {
     try {
         const userGames = await Game.find({user_created_game: true});
-        console.log(userGames);
-        res.render("games/user-games", {userGames});
+        //sort usergames by likes here!!!!!!!!!!!!!!!!
+        /* objs.sort((a,b) => a.last_nom - b.last_nom); */ // b - a for reverse sort
+        let sortedUserGames = userGames.sort((a, b) => b.likes.length - a.likes.length)
+        console.log(sortedUserGames);
+        
+        res.render("games/user-games", {sortedUserGames});
     } catch (error) {
         console.log(error);
         next(error)
@@ -164,7 +202,7 @@ router.get("/user-created-games", async (req, res, next) => {
 
 //get free games
 
-router.get("/free-games", (req, res, next) => res.render('games/free-games-list'))
+router.get("/free-games", isLoggedIn, (req, res, next) => res.render('games/free-games-list'))
 
 router.post("/free-games", async(req, res, next) => {
     const searchTerm = req.body.searchTerm;
@@ -183,6 +221,8 @@ router.post("/free-games", async(req, res, next) => {
         next(error)
     }
 })
+
+//details free game
 
 router.get('/details/free-game/:id', async (req, res, next) =>{
     const gameId = req.params.id;

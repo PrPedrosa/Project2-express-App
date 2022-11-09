@@ -14,8 +14,18 @@ const gameSchema = new Schema ({
     user_created_game: {
         type:Boolean,
         default:false
-    }  
-}, 
+    },
+    free_game: {
+        type:Boolean,
+        default:false
+    },
+    regular_game: {
+        type:Boolean,
+        default:true
+    },
+    creator: String,
+    likes: [String],
+},
 {
     timestamps: true, 
 })

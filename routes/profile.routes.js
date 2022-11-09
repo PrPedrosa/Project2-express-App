@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const User = require('../models/User.model');
-const isLoggedOut = require("../middleware/isLoggedOut");
+/* const isLoggedOut = require("../middleware/isLoggedOut"); */
 const isLoggedIn = require("../middleware/isLoggedIn");
 const Game = require("../models/Game.model");
 const fileUploader = require('../config/cloudinary.config');
@@ -34,14 +34,25 @@ router.post("/profile/delete/:id", async (req, res, next) =>{
     }
 })
 
+//delete game just from favs or from favs and database too
+
 router.post("/deleteFavGame/:id", async (req, res, next) => {
 
     const gameId = req.params.id;
     const userId = req.session.currentUser._id
 
     try {
+        const gameToRemove = await Game.findById(gameId);
+
+        if(gameToRemove.creator !== req.session.currentUser.username && gameToRemove.user_created_game === true){
+        await User.findByIdAndUpdate(userId, {$pull: {favoriteGames: gameId}});
+        }
+
+        else {
         await User.findByIdAndUpdate(userId, {$pull: {favoriteGames: gameId}});
         await Game.findByIdAndRemove(gameId);
+        }
+
         res.redirect("/profile");
         
     } catch (error) {
@@ -74,7 +85,8 @@ router.post("/edit-profile", async (req, res, next) =>{
 router.get("/create-game", (req, res, next) => res.render("profile/create-game-form"))
 
 router.post("/create-game", fileUploader.single('image'), async(req, res, next) =>{
-    const user = req.session.currentUser
+    const user = req.session.currentUser;
+    const userName = user.username;
     const {title, genre, platform, publisher, description, game_URL} = req.body;
     try {
         let imageUrl;
@@ -85,7 +97,18 @@ router.post("/create-game", fileUploader.single('image'), async(req, res, next) 
             imageUrl = 'https://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG';
           }
         
-        const createdGame = await Game.create({title, genre, platform, publisher, description, game_URL, image: imageUrl, user_created_game: true});
+        const createdGame = await Game.create({
+            title,
+            genre, 
+            platform, 
+            publisher, 
+            description, 
+            game_URL, 
+            image: imageUrl, 
+            user_created_game: true, 
+            regular_game: false,
+            creator: userName
+        });
         await User.findByIdAndUpdate(user._id, {$push: {favoriteGames: createdGame}});
         res.redirect("/profile");
 

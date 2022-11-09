@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="row justify-content-around">
-  {{#each userGames}}
+  {{#each sortedUserGames}}
   <div class="card" style="width: 18rem;">
   {{#if image}}
   <img src={{image}} class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
@@ -19,6 +19,7 @@
     {{#unless genres.1.name}} --}}
     <p class="card-text">{{genre}}</p>
     {{!-- {{/unless}} --}}
+    <p class="card-text">{{likes.length}}</p>
   </div>
     <a href="/details/{{_id}}" class="page-btn">Go to details</a>
   </div>

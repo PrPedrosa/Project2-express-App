@@ -236,3 +236,11 @@ textarea{
 #user-profile{
   padding: 5vh 5vh
 }
+
+.forms-p{
+  color: white;
+}
+
+.forms-p a {
+  color: aqua;
+}
