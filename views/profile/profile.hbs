@@ -1,24 +1,29 @@
 <div id="user-profile">
-
+<div class="profile-functions">
 <div class="profile-pic-edit-btn">
 <h2 id="profile-name">{{username}}</h2>
 <img src={{profilePicture}} alt="profilepic" class="profile-pic">
-<a href="/edit-profile" class="page-btn">Edit profile</a>
+</div>
+
+<div class="edit-functions">
+<form action="/create-game" method="get">
+  <button type="submit" class="page-btn">Add Game</button>
+</form>
+<form action="/edit-profile" method="get">
+  <button type="submit" class="page-btn">Edit profile</button>
+</form>
+<form action="/auth/logout" method="get">
+  <button type="submit" class="page-btn">Log Out</button>
+</form>
 <form action="/profile/delete/{{_id}}" method="post" id="delete-acc-form">
   <button type="submit" class="page-btn delete-acc-btn">...</button>
 </form>
 </div>
 
-<div class="profile-functions">
 
-<a href="/create-game" class="page-btn">Add Game</a>
-<form action="/auth/logout" method="get">
-  <button type="submit" class="page-btn">Log Out</button>
-</form>
-</div>
 
 </div>
-
+<hr class="hr-profile" width="29%" style="margin-bottom: 5vh;">
 
 <div class="container">
   <h2 id="my-games-title">My Games</h2>

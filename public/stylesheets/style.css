@@ -80,6 +80,12 @@ body {
 .search_free_games{
   color:#DAE4E7;
 }
+.best_user_created{
+  color:#DAE4E7;
+  padding-top: 5vh;
+  padding-left: 4vh;
+  font-family: 'Poppins', sans-serif;
+}
 
 .search_button{
   border-radius: 0.5em;
@@ -265,6 +271,8 @@ body {
 .best_game_title{
   text-align: center;
   margin:4vh;
+  color:#DAE4E7;
+  font-family: 'Poppins', sans-serif;
 }
 .image_details{
   border: 2px solid #68767A;
@@ -327,6 +335,17 @@ body {
     margin-top: 45%;
     margin-left: -242px
    }
-
+   .best_user_created{
+    color:#DAE4E7;
+    padding-top: 3vh;
+    padding-left: 2vh;
+    font-family: 'Poppins', sans-serif;
+  }
+  .profile-pics-div{
+    justify-content: center;
+  }
+  .hr-profile{
+    width:100%;
+  }
 
 }

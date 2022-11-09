@@ -185,7 +185,14 @@ textarea{
 }
 
 .profile-functions{
-  padding-left: 5vh;
+  /* padding-left: 5vh;
+  flex-direction: column; */
+  display: flex;
+}
+.edit-functions{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .profile-pic-edit-btn{
@@ -234,7 +241,10 @@ textarea{
 }
 
 #user-profile{
-  padding: 5vh 5vh
+  padding: 5vh 5vh;
+}
+.profile-functions{
+  display: flex;
 }
 
 .forms-p{
