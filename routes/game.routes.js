@@ -25,24 +25,20 @@ router.get("/details/:id", isLoggedIn, async(req, res, next) =>{
         if(gameId.length < 7){
             const apigame = await getOneGame(gameId);
 
-            let isGameOnFavorites;
+            let isGameOnFavorites = false
 
             userFavorites.forEach(game =>{
+    
             if(game.apiId == apigame.id){
+                
                 return isGameOnFavorites = true
             }
-            else if(userFavorites.indexOf(game) === userFavorites.length -1){
+            /* else if(userFavorites.indexOf(game) === userFavorites.length -1){
                 return isGameOnFavorites = false
-            }
+            } */
             })
             
-            /* let genresArr = apigame.genres;
-            let goodArr = genresArr.map(el => el.name)
-            let goodArrCopy = [...goodArr]
-            goodArrCopy.forEach((ele, i) => goodArr.splice(i, 0, "||"))
-            console.log(goodArr); */
-            /* console.log(currentUser.username) */
-
+            console.log(isGameOnFavorites)
             res.render("games/game-details", {apigame, isGameOnFavorites, session});
 
         
@@ -54,6 +50,11 @@ router.get("/details/:id", isLoggedIn, async(req, res, next) =>{
             let userGameOnFavoritesAndCurrentUserIsTheCreator;
             let userGameNotOnCurrentUserFavorites;
 
+            //let favGames = [];
+            //userFavorites.forEach(game => favGames.push(game));
+
+            console.log(userFavorites.includes(gameId))
+
             userFavorites.forEach(game =>{
             if(game.title === userGame.title && userToCheck.username === userGame.creator){
                 return userGameOnFavoritesAndCurrentUserIsTheCreator = true;
@@ -62,10 +63,17 @@ router.get("/details/:id", isLoggedIn, async(req, res, next) =>{
                 return userGameOnFavoritesAndCurrentUserNotTheCreator = true;
             }
             else if(userFavorites.indexOf(game) === userFavorites.length -1){
-                if(userGameOnFavoritesAndCurrentUserIsTheCreator) userGameNotOnCurrentUserFavorites = false;
+                if(userGameOnFavoritesAndCurrentUserIsTheCreator) {
+                  return userGameNotOnCurrentUserFavorites = false;
+                }
+                if(userGameOnFavoritesAndCurrentUserNotTheCreator) {
+                  return userGameNotOnCurrentUserFavorites = false;
+                }
+                
                 return userGameNotOnCurrentUserFavorites = true;
             }
         })
+        console.log(userGameNotOnCurrentUserFavorites, userGameOnFavoritesAndCurrentUserIsTheCreator, userGameOnFavoritesAndCurrentUserNotTheCreator)
         /* console.log(isUserGameOnFavorites) */
             
             res.render("games/user-game-details", {userGame, userGameOnFavoritesAndCurrentUserNotTheCreator, userGameOnFavoritesAndCurrentUserIsTheCreator, userGameNotOnCurrentUserFavorites, session});
@@ -156,10 +164,10 @@ router.post('/addGame/:id', isLoggedIn, async (req, res, next) => {
                 game_rating:rating,
                 game_release_date:released_at
             })
-            await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
+            await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames: gameToAdd._id}})
         } else {
             const userCreatedFavoritedGame = await Game.findById(gameId);
-            await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames: userCreatedFavoritedGame._id}});
+            await User.findByIdAndUpdate(currentUser._id, {$push: {favoriteGames: userCreatedFavoritedGame._id}});
             //likes
             if(!(userCreatedFavoritedGame.likes.includes(username)))
             await Game.findByIdAndUpdate(gameId, {$push:{likes: username}})
@@ -195,21 +203,26 @@ router.post("/addFreeGame/:id", isLoggedIn, async (req, res, next) =>{
             free_game: true,
             regular_game: false
         })
+        await User.findByIdAndUpdate(currentUserId, {$push:{favoriteGames:gameToAdd._id}})
+
+        res.redirect(`/details/free-game/${gameToAdd.apiId}`);
+
 
         //not getting duplicate free games on user profile
-        const userToCheck = await User.findById(currentUserId).populate("favoriteGames");
+
+        /* const userToCheck = await User.findById(currentUserId).populate("favoriteGames");
         const userFavorites = userToCheck.favoriteGames;
         userFavorites.forEach(async game =>{
-            if(game.apiId === gameToAdd.apiId){
+            if(game.apiId == gameToAdd.apiId){
                 res.redirect(`/details/free-game/${gameToAdd.apiId}`);
                 return;
             }
-            else if(userFavorites.indexOf(game) === userFavorites.length -1){
+            else if(userFavorites.indexOf(game) === userFavorites.length-1){
 
                 await User.findByIdAndUpdate(currentUser._id, {$push:{favoriteGames:gameToAdd._id}})
                 res.redirect(`/details/free-game/${gameToAdd.apiId}`);
             }
-        })
+        }) */
     } catch (error) {
         console.log(error)
         next(error)
@@ -304,15 +317,15 @@ router.get('/details/free-game/:id', async (req, res, next) =>{
         const userFavorites = userToCheck.favoriteGames;
         const freeGame = await getFreeGames(gameId);
 
-        let isGameOnFavorites;
+        let isGameOnFavorites = false
 
         userFavorites.forEach(game =>{
             if(game.apiId == freeGame.id){
                 return isGameOnFavorites = true
             }
-            else if(userFavorites.indexOf(game) === userFavorites.length -1){
+           /*  else if(userFavorites.indexOf(game) == userFavorites.length -1){
                 return isGameOnFavorites = false
-            }
+            } */
         })
 
         console.log(isGameOnFavorites)
