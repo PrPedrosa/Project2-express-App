@@ -1,0 +1,28 @@
+<h2 class="best_user_created">Best User Created Games 🖥️</h2>
+
+<div class="container">
+  <div class="row justify-content-around">
+  {{#each sortedUserGames}}
+  <div class="card" style="width: 18rem;">
+  {{#if image}}
+  <img src={{image}} class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/if}}
+  {{#unless image}}
+  <img src="/images/404.png" class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/unless}}
+  <div class="card-body">
+    <h4 class="card-title">{{title}}</h4>
+    <hr>
+    {{!-- {{#if genres.1.name}}
+    <p class="card-text">{{genres.0.name}} || {{genres.1.name}}</p>
+    {{/if}}
+    {{#unless genres.1.name}} --}}
+    <p class="card-text">{{genre}}</p>
+    {{!-- {{/unless}} --}}
+    <p class="card-text likes-text">{{likes.length}} <img src="/images/logo2.png" class="likes-img" alt=""></p>
+  </div>
+    <a href="/details/{{_id}}" class="page-btn">Go to details</a>
+  </div>
+  {{/each}}
+</div>
+</div>

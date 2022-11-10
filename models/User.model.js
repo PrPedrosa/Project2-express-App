@@ -5,7 +5,7 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: false,
+      required: true,
       unique: true,
       trim: true,
     },
@@ -20,6 +20,11 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    favoriteGames: [{
+      type: Schema.Types.ObjectId, 
+      ref: 'Game',
+    }],
+    profilePicture: String,
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

@@ -1,0 +1,52 @@
+<div class="main_details">
+    <h2>{{userGame.title}}</h2>
+
+    <div class ="arrange_image">
+    {{#if userGame.image}}
+    <img class="image_details" src={{userGame.image}} width="600px">
+    {{/if}}
+    {{#unless userGame.image}}
+    <img class="image_details" src="/images/404.png" width="600px">
+    {{/unless}}
+     <div class ="main_publisher">
+     <div class="publisher"><b>Publisher: {{userGame.publisher}}</b>
+     
+     </div>
+     <form action="/addGame/{{userGame._id}}" method="post">
+     {{!-- <div class="release_date"><b>Released Date</b> <br>{{release_date}}</div> --}}
+     {{#if userGame.game_URL}}
+     <a class ="website" target="_blank" href="{{userGame.game_URL}}"><b>Website</b></a>
+     {{/if}}
+
+    {{#if userGame.metacritic}}
+    <div class="rating"><b>Rating:</b>{{userGame.metacritic}}</h3>
+    </div>
+    {{/if}}
+     <div class="submit_form">
+        {{#if userGameNotOnCurrentUserFavorites}}
+        <button class="like_button" type ="submit"><img class ="like_button_image"src="/images\logo2.png"></button>
+        <span><b>Add to My Games</b></span>
+        {{/if}}
+        {{#if userGameOnFavoritesAndCurrentUserNotTheCreator}}
+        <img class ="like_button_image"src="/images\logo2.png" style="width: 10vh">
+        <span style="color: rgb(0, 204, 0);"><b>Liked Game :)</b></span>
+        {{/if}}
+        {{#if userGameOnFavoritesAndCurrentUserIsTheCreator}}
+        <img class ="like_button_image"src="/images\logo2.png" style="width: 10vh">
+        <span><b>My Game</b></span>
+        {{/if}}
+     </div>
+     </form>
+     </div>
+     </div>
+
+    <div class="game_genre">
+    {{userGame.genre}}
+    </div>
+    
+
+    <div class="platforms"><b>Available on</b><br>
+    {{userGame.platform}}
+    </div>
+
+    <div class="description">{{{userGame.description}}}</div>

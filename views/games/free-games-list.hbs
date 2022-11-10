@@ -1,0 +1,34 @@
+<div class="free_games">
+<h1 class="search_free_games">Search for free Games 🕹️</h1>
+<form action="/free-games" method="post">
+<input class="search_input_free" type="text" name="searchTerm" id="search" placeholder="...">
+<button class="search_button_free" type="submit"><img class="image_search" src="/images/search_2.png" alt=""></button>
+</form>
+</div>
+
+
+<div class="container">
+  <div class="row justify-content-around">
+  {{#each gamesArr}}
+  <div class="card" style="width: 18rem;">
+  {{#if thumbnail}}
+  <img src={{thumbnail}} class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/if}}
+  {{#unless thumbnail}}
+  <img src="/images/404.png" class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/unless}}
+  <div class="card-body">
+    <h4 class="card-title">{{title}}</h4>
+    <hr>
+    {{!-- {{#if genres.1.name}}
+    <p class="card-text">{{genres.0.name}} || {{genres.1.name}}</p>
+    {{/if}}
+    {{#unless genres.1.name}} --}}
+    <p class="card-text">{{genre}}</p>
+    {{!-- {{/unless}} --}}
+  </div>
+    <a href="/details/free-game/{{id}}" class="page-btn">Go to details</a>
+  </div>
+  {{/each}}
+</div>
+</div>

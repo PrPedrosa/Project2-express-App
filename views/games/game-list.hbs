@@ -1,0 +1,81 @@
+<div class="page-btn-div">
+  <p>{{numOfGames}} Games</p>
+
+  {{#if isFirstPage}}  
+    <button type="button" class="page-btn page-btn-no-worky">previous</button>
+  {{/if}}
+
+  {{#unless isFirstPage}}  
+  <form action="/search/{{page}}/previous/{{gameName}}" method="post">
+    <button type="submit" class="page-btn">previous</button>
+  </form> 
+  {{/unless}}
+
+  {{#if isLastPage}}  
+    <button type="button" class="page-btn page-btn-no-worky">next</button>
+  {{/if}}
+
+  {{#unless isLastPage}}
+  <form action="/search/{{page}}/next/{{gameName}}" method="post">
+    <button type="submit" class="page-btn">next</button>
+  </form>
+  {{/unless}}
+
+
+  <p>Page: {{page}} / {{numOfPages}}</p>
+</div>
+
+
+<div class="container">
+  <div class="row justify-content-around">
+  {{#each games}}
+  <div class="card" style="width: 18rem;">
+  {{#if background_image}}
+  <img src={{background_image}} class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/if}}
+  {{#unless background_image}}
+  <img src="/images/404.png" class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/unless}}
+  <div class="card-body">
+    <h4 class="card-title">{{name}}</h4>
+    <hr>
+    {{#if genres.1.name}}
+    <p class="card-text">{{genres.0.name}} || {{genres.1.name}}</p>
+    {{/if}}
+    {{#unless genres.1.name}}
+    <p class="card-text">{{genres.0.name}}</p>
+    {{/unless}}
+  </div>
+    
+    <a href="/details/{{id}}" class="page-btn">Go to details</a>
+  </div>
+  {{/each}}
+</div>
+</div>
+
+
+
+<div class="page-btn-div">
+
+  {{#if isFirstPage}}  
+    <button type="button" class="page-btn page-btn-no-worky">previous</button>
+  {{/if}}
+
+  {{#unless isFirstPage}}  
+  <form action="/search/{{page}}/previous/{{gameName}}" method="post">
+    <button type="submit" class="page-btn">previous</button>
+  </form> 
+  {{/unless}}
+
+
+  {{#if isLastPage}}  
+    <button type="button" class="page-btn page-btn-no-worky">next</button>
+  {{/if}}
+
+  {{#unless isLastPage}}
+  <form action="/search/{{page}}/next/{{gameName}}" method="post">
+    <button type="submit" class="page-btn">next</button>
+  </form>
+  {{/unless}}
+</div>
+

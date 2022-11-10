@@ -5,13 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{appTitle}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    
+    
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/style.gameList.css">
   </head>
 
   <body>
+  <nav class="navbar navbar-expand-lg navigation">
+  <div class="container-fluid">
+    <div class="logo_phone_version">
+    <a class="navbar-brand" href="/">
+    <img class="image_logo" src="/images\MainPage\pokeLogo.png" alt="logo"><span class="gaming_hub">GamingHub</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="more-games-tab">
+            More Games
+          </a>
+           <ul class="dropdown-menu dropdown-menu dropdown">
+            <li class="navbar-nav-li-more"><a class="nav-link-li" href="/best-games">Best of 2022</a></li>
+            
+            <li class="navbar-nav-li-more"><a class="nav-link-li" href="/user-created-games">User Created</a></li>
+            
+            <li class="navbar-nav-li-more"><a class="nav-link-li" href="/free-games">Free!</a></li>
+          </ul>
+        </li>
+        {{#unless session.currentUser}}
+        <li class="navbar-nav-li"><a class="nav-link" href="/auth/signup">Sign Up</a></li>
+        <li class="navbar-nav-li"> <a class="nav-link" href="/auth/login">Log In</a></li>
+        {{/unless}}
+        {{#if session.currentUser}}
+        <li class="navbar-nav-li"><a class="nav-link" href="/auth/logout">Log Out</a></li>
+        <li class="navbar-nav-li"><a class="nav-link" href="/profile">My Profile</a></li>
+        {{/if}}
+        <div class ="search">
+        <form action="/search" method="post">
+        <input class="search_input" type="text" name="game" id="search" placeholder="Search Games">
+        </div>
+        <button class="search_button" type="submit"><img class="image_search" src="/images/search_2.png" alt=""></button>
+       
+      </form>
+        </div>
+        
+        
+       
+      </form>
+      </div>
+    </div>
+  </div>
+</nav>
+
 
     {{{body}}}
 
+    {{!-- <footer class="text-md-start bg-light text-muted">
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2021 Copyright:
+       <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      </div>
+    </footer> --}}
+
+
+    {{!-- <footer class="footer">
+      <p>Developed by <a href="https://github.com/DianaMariaa98" target="_blank">Diana Pirlici</a> and <a href="https://github.com/PrPedrosa" target="_blank">Pedro Pedrosa</a></p>
+    </footer> --}}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="/js/script.js"></script>
   </body>
 

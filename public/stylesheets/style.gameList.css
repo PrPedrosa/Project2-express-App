@@ -1,0 +1,321 @@
+.page-btn-div{
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2vh;
+}
+
+.page-btn{
+  text-decoration: none;
+  border: none;
+  background: black;
+  font-family: 'Poppins', sans-serif;
+  color: #BABFCA;
+  margin: 1vh 1vh;
+  padding:0.5vh 0.5vw;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.page-btn:hover{
+  /* background: #3E7797 ; */
+  background-color: #90ECF4;
+  color: #050e2d;
+  box-shadow: 0 0 20px 0 #050e2d;
+}
+
+.page-btn-div p{
+  color: white;
+  margin: 1vh 1vh;
+  padding:1vh 1vw;
+}
+
+.page-btn-no-worky:hover{
+  background-color: red;
+  color: #050e2d;
+  box-shadow: 0 0 10px red;
+  cursor: not-allowed;
+}
+
+.card{
+  margin: 3vh;
+  padding: 0;
+  background-color: #050e2d;
+  border: 2px solid #BABFCA;
+  box-shadow: 10px 10px 20px 0 #3E7797;
+  border-radius: 10px;
+}
+
+.card:hover{
+  box-shadow: 0 0 75px 0 aqua;
+}
+
+.card-title{
+  color: #BABFCA;
+}
+
+.card-text{
+  color: #BABFCA;
+}
+
+hr{
+  border-bottom: 2px solid white;
+}
+
+.form-div{
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-title{
+  color: white;
+  text-align: center;
+  padding: 1vh;
+}
+
+.log-form{
+  display: flex;
+  flex-direction: column;
+  border: 3px solid white;
+  padding: 5vh;
+  border-radius: 10px;
+  margin: 5vh;
+
+}
+
+.log-form label{
+  color: white
+}
+
+.log-form input{
+  width: 100%;
+  height: 5vh;
+  margin-bottom: 3vh;
+  border-radius: 10px;
+  background-color: rgb(238, 238, 238);
+}
+
+.log-btn{
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #90ECF4;
+  margin: 3vh;
+  padding: 2vh;
+  border: 1px solid #90ECF4;
+  background-color: black;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px #90ECF4;
+  align-self: center;
+}
+
+.log-btn:hover{
+  color: black;
+  background-color: #90ECF4;
+  box-shadow: 5px 5px 5px black;
+}
+
+textarea{
+  width: 100%;
+  height: 10vh; 
+  margin-bottom: 3vh;
+  border-radius: 10px;
+  background-color: rgb(238, 238, 238); 
+}
+
+#image-input{
+  color: #3E7797;
+  height: 4vh;
+  margin-bottom: 3vh;
+  border-radius: 10px;
+  background-color: rgb(238, 238, 238);
+}
+
+.profile-pic{
+  border: 2px solid white;
+  border-radius: 50%;
+  background-color: black;
+  width: 20vh;
+  height: 20vh;
+  margin: 1vh;
+}
+
+.profile-pics-inputs{
+  margin-bottom: 5vh;
+}
+
+.radio-inputs{
+  width: 20vh;
+  height: 4vh;
+  margin: 1vh;
+}
+
+.footer{
+  position: fixed;
+  bottom: 0vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100vw;
+  height: 6vh;
+  background: rgb(33,32,115);
+  background: linear-gradient(90deg, rgba(33,32,115,0.8660057773109244) 100%, rgba(0,108,255,0.5270702030812324) 100%);
+}
+
+.footer p{
+  margin: 0 5vh;
+  color: #90ECF4;
+  font-family: "Poppins"
+}
+
+.profile-cards-btns{
+  display: flex;
+}
+
+.delete-btn:hover{
+  background-color: red;
+}
+
+#profile-name{
+  color: #90ECF4;
+  margin: 0;
+}
+
+.profile-functions{
+  /* padding-left: 5vh;
+  flex-direction: column; */
+  display: flex;
+}
+.edit-functions{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.profile-pic-edit-btn{
+  padding-left: 5vh;
+  padding-bottom: 2vh;
+}
+
+.delete-acc-btn:hover{
+  background-color: tomato;
+  cursor: not-allowed;
+}
+
+.delete-acc-btn:hover::after{
+  content: "Delete Account :(";
+}
+
+#my-games-title{
+  color:#90ECF4;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2vh;
+}
+
+#delete-acc-form{
+  display: inline;
+}
+
+.profile-pics-div{
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.inputs-box{
+  /* border: 1px solid black; */
+  border-radius: 50%;
+  padding: 1vh;
+  margin: 3vh
+}
+
+.inputs-box:hover{
+  box-shadow: 0px 0px 50px 10px rgba(182,130,90,1);
+  background-color:#050e2d
+}
+
+.edit-pic-btn:hover{
+  background-color: green;
+}
+
+#user-profile{
+  padding: 5vh 5vh;
+}
+.profile-functions{
+  display: flex;
+}
+
+.forms-p{
+  color: white;
+}
+
+.forms-p a {
+  color: aqua;
+}
+
+#more-games-tab{
+  background: none;
+}
+
+#more-games-tab:hover{
+  background-color: #90ECF4;
+}
+
+.navbar-nav-li-more{
+  padding: 2vh;
+  text-align: center;
+  margin: 0.5vh;
+  border-radius: 10px;
+}
+
+.navbar-nav-li-more:hover{
+  background-color: #90ECF4;
+}
+
+.navbar-nav-li-more:hover .nav-link-li{
+  color:#050e2d;
+}
+
+.nav-link-li{
+  color:#90ECF4;
+}
+
+.nav-link-li:hover{
+  color:#050e2d;
+}
+
+.error{
+  font-weight: bold;
+  color: rgb(209, 0, 0);
+  background-color: black;
+  padding: 1vh;
+  border-radius: 10px;
+}
+
+.likes-img{
+  width: 5vh;
+}
+
+.likes-text{
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgb(219, 0, 0);
+}
+
+.site-error{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.span-likes-text-profile{
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}

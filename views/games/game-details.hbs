@@ -1,0 +1,63 @@
+    
+    <div class="main_details">
+    <h2 class="game_name_details">{{apigame.name}}</h2>
+
+    <div class ="arrange_image">
+    {{#if apigame.background_image}}
+    <img class="image_details" src={{apigame.background_image}} width="600px">
+    {{/if}}
+    {{#unless apigame.background_image}}
+    <img class="image_details" src="/images/404.png" width="600px">
+    {{/unless}}
+     <div class ="main_publisher">
+     <div class="publisher"><b class="details_bold">Publisher: </b>
+     {{#each apigame.publishers}}
+     {{name}}
+     {{/each}}
+     </div>
+     <form action="/addGame/{{apigame.id}}" method="post">
+     <div class="release_date"><b class="details_bold">Released Date</b> <br>{{apigame.released}}</div>
+     {{#if apigame.website}}
+     <a class ="website" target="_blank" href="{{apigame.website}}"><b class="website_bold">Website</b></a>
+     {{/if}}
+
+    {{#if apigame.metacritic}}
+    <div class="rating"><b class="details_bold">Rating:</b> {{apigame.metacritic}}</h3>
+    </div>
+    {{/if}}
+    <div class="submit_form">
+        {{#unless isGameOnFavorites}}
+        <button class="like_button" type ="submit"><img class ="like_button_image"src="/images\logo2.png"></button>
+        <span><b>Add to My Games</b></span>
+        {{/unless}}
+        {{#if isGameOnFavorites}}
+        <img class ="like_button_image"src="/images\logo2.png" style="width: 10vh">
+        <span style="color: rgb(0, 204, 0);"><b>Liked Game :)</b></span>
+        {{/if}}
+     </div>
+     </form>
+     </div>
+     </div>
+
+    <div class="game_genre">
+    {{#each apigame.genres}}
+    <span>{{name}} ||</span>
+    {{/each}}
+    </div>
+    
+
+    <div class="platforms"><b class="details_bold">Available on</b><br>
+    {{#each apigame.platforms}}
+    {{platform.name}}
+    {{/each}}
+    </div>
+
+    <div class="description">{{{apigame.description}}}</div>
+    
+   
+    
+
+
+    
+
+

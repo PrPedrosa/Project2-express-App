@@ -1,0 +1,84 @@
+<h1 class="best_game_title">Best {{bigGenres}} Games of 2022</h1>
+
+<div class="best_games_buttons">
+<form action="/bestGames/action" method="post">
+<button type="submit" class="page-btn">Action</button>
+</form>
+
+<form action="/bestGames/adventure" method="post">
+<button type="submit" class="page-btn">Adventure</button>
+</form>
+
+<form action="/bestGames/shooter" method="post">
+<button type="submit" class="page-btn">Shooter</button>
+</form>
+
+<form action="/bestGames/strategy" method="post">
+<button type="submit" class="page-btn">Strategy</button>
+</form>
+
+<form action="/bestGames/role-playing-games-rpg" method="post">
+<button type="submit" class="page-btn">RPG</button>
+</form>
+
+<form action="/bestGames/casual" method="post">
+<button type="submit" class="page-btn">Casual</button>
+</form>
+
+<form action="/bestGames/massively-multiplayer" method="post">
+<button type="submit" class="page-btn">MMO</button>
+</form>
+
+<form action="/bestGames/fighting" method="post">
+<button type="submit" class="page-btn">Fighting</button>
+</form>
+
+<form action="/bestGames/simulation" method="post">
+<button type="submit" class="page-btn">Simulation</button>
+</form>
+
+<form action="/bestGames/arcade" method="post">
+<button type="submit" class="page-btn">Arcade</button>
+</form>
+
+<form action="/bestGames/racing" method="post">
+<button type="submit" class="page-btn">Racing</button>
+</form>
+
+<form action="/bestGames/sports" method="post">
+<button type="submit" class="page-btn">Sports</button>
+</form>
+
+<form action="/bestGames/indie" method="post">
+<button type="submit" class="page-btn">Indie</button>
+</form>
+
+</div>
+
+<div class="container">
+  <div class="row justify-content-around">
+  {{#each games}}
+  <div class="card" style="width: 18rem;">
+  {{#if background_image}}
+  <img src={{background_image}} class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/if}}
+  {{#unless background_image}}
+  <img src="/images/404.png" class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/unless}}
+  <div class="card-body">
+    <h5 class="card-title">{{name}}</h5>
+    <hr>
+    {{#if genres.1.name}}
+    <p class="card-text">{{genres.0.name}} || {{genres.1.name}}</p>
+    {{/if}}
+    {{#unless genres.1.name}}
+    <p class="card-text">{{genres.0.name}}</p>
+    {{/unless}}
+    <p class="card-text">Rating: {{metacritic}}</p>
+  </div>
+    <a href="/details/{{id}}" class="page-btn">Go to details</a>
+  </div>
+  {{/each}}
+</div>
+</div>
+

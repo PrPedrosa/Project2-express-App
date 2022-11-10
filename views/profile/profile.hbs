@@ -1,0 +1,79 @@
+<div id="user-profile">
+<div class="profile-functions">
+<div class="profile-pic-edit-btn">
+<h2 id="profile-name">{{currentUser.username}}</h2>
+<img src={{currentUser.profilePicture}} alt="profilepic" class="profile-pic">
+</div>
+
+<div class="edit-functions">
+<form action="/create-game" method="get">
+  <button type="submit" class="page-btn">Add Game</button>
+</form>
+<form action="/edit-profile" method="get">
+  <button type="submit" class="page-btn">Edit profile</button>
+</form>
+<form action="/auth/logout" method="get">
+  <button type="submit" class="page-btn">Log Out</button>
+</form>
+<form action="/profile/delete/{{_id}}" method="post" id="delete-acc-form">
+  <button type="submit" class="page-btn delete-acc-btn">...</button>
+</form>
+</div>
+
+
+
+</div>
+<hr class="hr-profile" width="29%" style="margin-bottom: 5vh;">
+
+<div class="container">
+  <h2 id="my-games-title">My Games</h2>
+  <div class="row justify-content-around">
+  {{#each currentUser.favoriteGames}}
+  <div class="card" style="width: 18rem;">
+
+  {{#if image}}
+  <img src={{image}} class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/if}}
+
+  {{#unless image}}
+  <img src="/images/404.png" class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
+  {{/unless}}
+
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <hr>
+    {{#if genre.1.name}}
+    <p class="card-text">{{genre.0.name}} || {{genre.1.name}}</p>
+    {{/if}}
+    {{#unless genre.1.name}}
+    <p class="card-text">{{genre.0.name}}</p>
+    {{/unless}}
+    {{#if free_game}}
+    <p class="card-text">{{genre}}</p>
+    {{/if}}
+    {{#if user_created_game}}
+    <p class="card-text">{{genre}}</p>
+    {{/if}}
+    {{#if likes}}
+    <p class="card-text likes-text">{{likes.length}} <img src="/images/logo2.png" class="likes-img" alt=""> <span class="span-likes-text-profile">|| user created ||</span></p>
+    {{/if}}
+  </div>
+    <div class="profile-cards-btns">
+    {{#if free_game}}
+    <a href="/details/free-game/{{apiId}}" class="page-btn">Go to details</a>
+    {{/if}}
+    {{#if regular_game}}
+    <a href="/details/{{apiId}}" class="page-btn">Go to details</a>
+    {{/if}}
+    {{#if user_created_game}}
+    <a href="/details/{{_id}}" class="page-btn">Go to details</a>
+    {{/if}}
+    <form action="/deleteFavGame/{{_id}}" method="post">
+      <button type="submit" class="page-btn delete-btn">Delete Game</button>
+    </form>
+    </div>
+  </div>
+  {{/each}}
+</div>
+</div>
+
