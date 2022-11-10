@@ -126,6 +126,11 @@ router.post("/create-game", fileUploader.single('image'), async(req, res, next) 
             await Game.findByIdAndUpdate(gameId, {$push:{likes: userName}})
         } */
 
+       /*  for(let i = 0; i<99; i++){  SECRET CODE FOR 99 LIKES
+            let gameId = createdGame._id
+            await Game.findByIdAndUpdate(gameId, {$push:{likes: userName}})
+        } */
+
     } catch (error) {
         console.log(error)
         next(error)
