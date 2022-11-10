@@ -2,7 +2,10 @@ const {Schema, model} = require('mongoose')
 
 const gameSchema = new Schema ({
     apiId:String,
-    title: String, 
+    title: {
+        type: String,
+        required: true,
+    }, 
     genre: [Object], 
     platform: String, 
     publisher: String, 
