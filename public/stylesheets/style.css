@@ -234,7 +234,7 @@ body {
   padding-left: 3%;
 }
 .like_button_image{
-  width: 2em;
+  width: 5vh;
 }
 .like_button{
   border: none;
@@ -289,6 +289,30 @@ body {
  padding-top: 10vh;
  padding-left: 17vh;
 }
+.andre{
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 35%;
+}
+.cloud{
+  width: 15em;
+  height: 15em;
+  
+}
+.arrange_andre{
+  padding-left: 27%;
+  display:flex;
+  
+}
+.pokemon_video{
+  width: 35em;
+  padding-left: 4%;
+  padding-top: 20%;
+ 
+}
+
+
 
 
 
