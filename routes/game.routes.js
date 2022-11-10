@@ -308,5 +308,7 @@ router.get('/details/free-game/:id', async (req, res, next) =>{
     }
 })
 
+router.get('/pokemon', (req, res, next) => res.render('games/pokemon'));
+
 module.exports = router;
 
