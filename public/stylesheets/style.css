@@ -234,7 +234,7 @@ body {
   padding-left: 3%;
 }
 .like_button_image{
-  width: 2em;
+  width: 5vh;
 }
 .like_button{
   border: none;
@@ -311,9 +311,7 @@ body {
   padding-top: 20%;
  
 }
-.poki_video{
-  border: 4px solid black;
-}
+
 
 
 

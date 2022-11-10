@@ -10,13 +10,27 @@
     <img class="image_details" src="/images/404.png" width="600px">
     {{/unless}}
      <div class ="main_publisher">
+     {{#if apigame.publishers}}
      <div class="publisher"><b class="details_bold">Publisher: </b>
      {{#each apigame.publishers}}
      {{name}}
      {{/each}}
      </div>
+     {{/if}}
+     {{#unless apigame.publishers}}
+     <div class="publisher"><b class="details_bold">Publisher: </b><span> No Data Found</span></div>
+     {{/unless}}
+     
+
+
+
      <form action="/addGame/{{apigame.id}}" method="post">
+     {{#if apigame.released}}
      <div class="release_date"><b class="details_bold">Released Date</b> <br>{{apigame.released}}</div>
+     {{/if}}
+     {{#unless apigame.released}}
+     <div class="release_date"><b class="details_bold">Released Date</b> <br>No Date Found</div>
+     {{/unless}}
      {{#if apigame.website}}
      <a class ="website" target="_blank" href="{{apigame.website}}"><b class="website_bold">Website</b></a>
      {{/if}}
@@ -31,8 +45,8 @@
         <span><b>Add to My Games</b></span>
         {{/unless}}
         {{#if isGameOnFavorites}}
-        <img class ="like_button_image"src="/images\logo2.png" style="width: 10vh">
-        <span style="color: rgb(0, 204, 0);"><b>Liked Game :)</b></span>
+        <img class ="like_button_image"src="/images\logo2.png" style="width: 5vh">
+        <span style="color: rgb(0, 204, 0);"><b>Liked Game 😊</b></span>
         {{/if}}
      </div>
      </form>
@@ -53,9 +67,8 @@
     </div>
 
     <div class="description">{{{apigame.description}}}</div>
-    
-   
-    
+
+  
 
 
     
