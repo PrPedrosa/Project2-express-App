@@ -1,8 +1,8 @@
 <div id="user-profile">
 <div class="profile-functions">
 <div class="profile-pic-edit-btn">
-<h2 id="profile-name">{{username}}</h2>
-<img src={{profilePicture}} alt="profilepic" class="profile-pic">
+<h2 id="profile-name">{{currentUser.username}}</h2>
+<img src={{currentUser.profilePicture}} alt="profilepic" class="profile-pic">
 </div>
 
 <div class="edit-functions">
@@ -28,7 +28,7 @@
 <div class="container">
   <h2 id="my-games-title">My Games</h2>
   <div class="row justify-content-around">
-  {{#each favoriteGames}}
+  {{#each currentUser.favoriteGames}}
   <div class="card" style="width: 18rem;">
 
   {{#if image}}
@@ -53,6 +53,9 @@
     {{/if}}
     {{#if user_created_game}}
     <p class="card-text">{{genre}}</p>
+    {{/if}}
+    {{#if likes}}
+    <p class="card-text likes-text">{{likes.length}} <img src="/images/logo2.png" class="likes-img" alt=""> <span class="span-likes-text-profile">|| user created ||</span></p>
     {{/if}}
   </div>
     <div class="profile-cards-btns">

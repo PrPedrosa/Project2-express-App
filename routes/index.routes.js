@@ -7,10 +7,9 @@ const getGames = require('../services/api.service');
 
 /* GET home page */
 router.get("/", async (req, res, next) => {
-  const {currentUser} = req.session
+  const {session} = req;
 
-
-  res.render("index", currentUser);
+  res.render("index", {session});
 });
 
 module.exports = router;

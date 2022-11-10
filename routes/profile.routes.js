@@ -4,16 +4,17 @@ const User = require('../models/User.model');
 const isLoggedIn = require("../middleware/isLoggedIn");
 const Game = require("../models/Game.model");
 const fileUploader = require('../config/cloudinary.config');
+const session = require("express-session");
 
 //go to user Profile
 
 router.get('/profile', isLoggedIn, async (req, res, next) =>{
     try {
-        
+        const {session} = req
         const currentUserId = req.session.currentUser._id;
         /* currentUser.populate('favoriteGames'); */
         const currentUser = await User.findById(currentUserId).populate('favoriteGames');
-        res.render('profile/profile', currentUser)
+        res.render('profile/profile', {currentUser, session})
     } catch (error) {
         console.log(error);
         next(error)
@@ -65,7 +66,10 @@ router.post("/deleteFavGame/:id", async (req, res, next) => {
 
 // edit profile picture
 
-router.get("/edit-profile", (req, res, next) => res.render("profile/edit-profile"))
+router.get("/edit-profile", (req, res, next) => {
+    const {session} = req
+    res.render("profile/edit-profile", {session})
+})
 
 router.post("/edit-profile", async (req, res, next) =>{
     const newProfilePicture = req.body.pic
@@ -84,7 +88,10 @@ router.post("/edit-profile", async (req, res, next) =>{
 
 // create a game
 
-router.get("/create-game", (req, res, next) => res.render("profile/create-game-form"))
+router.get("/create-game", (req, res, next) => {
+    const {session} = req
+    res.render("profile/create-game-form", {session})
+})
 
 router.post("/create-game", fileUploader.single('image'), async(req, res, next) =>{
     const user = req.session.currentUser;

@@ -12,9 +12,10 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 //get game details
 
-router.get("/details/:id", async(req, res, next) =>{
+router.get("/details/:id", isLoggedIn, async(req, res, next) =>{
     try {
         const gameId = req.params.id;
+        const {session} = req
         const currentUserId = req.session.currentUser._id;
         const userToCheck = await User.findById(currentUserId).populate("favoriteGames");
         const userFavorites = userToCheck.favoriteGames;
@@ -40,27 +41,34 @@ router.get("/details/:id", async(req, res, next) =>{
             let goodArrCopy = [...goodArr]
             goodArrCopy.forEach((ele, i) => goodArr.splice(i, 0, "||"))
             console.log(goodArr); */
+            /* console.log(currentUser.username) */
 
-            res.render("games/game-details", {apigame, isGameOnFavorites});
+            res.render("games/game-details", {apigame, isGameOnFavorites, session});
 
         
         //get user game details
         } else{
             const userGame = await Game.findById(gameId);
 
-            let isUserGameOnFavorites;
+            let userGameOnFavoritesAndCurrentUserNotTheCreator;
+            let userGameOnFavoritesAndCurrentUserIsTheCreator;
+            let userGameNotOnCurrentUserFavorites;
 
             userFavorites.forEach(game =>{
-            if(game.title == userGame.title){
-                return isUserGameOnFavorites = true
+            if(game.title === userGame.title && userToCheck.username === userGame.creator){
+                return userGameOnFavoritesAndCurrentUserIsTheCreator = true;
+
+            }else if(game.title === userGame.title && userToCheck.username !== userGame.creator){
+                return userGameOnFavoritesAndCurrentUserNotTheCreator = true;
             }
             else if(userFavorites.indexOf(game) === userFavorites.length -1){
-                return isUserGameOnFavorites = false
+                if(userGameOnFavoritesAndCurrentUserIsTheCreator) userGameNotOnCurrentUserFavorites = false;
+                return userGameNotOnCurrentUserFavorites = true;
             }
         })
-        console.log(isUserGameOnFavorites)
+        /* console.log(isUserGameOnFavorites) */
             
-            res.render("games/user-game-details", {userGame, isUserGameOnFavorites});
+            res.render("games/user-game-details", {userGame, userGameOnFavoritesAndCurrentUserNotTheCreator, userGameOnFavoritesAndCurrentUserIsTheCreator, userGameNotOnCurrentUserFavorites, session});
         }
         
     } catch (error) {
@@ -73,6 +81,8 @@ router.get("/details/:id", async(req, res, next) =>{
 
 router.post("/search", async (req, res, next) => {
     const gameName = req.body.game;
+    const user = req.session.currentUser;
+    const {session} = req
     let isFirstPage = true;
     let isLastPage = false;
     try {
@@ -81,10 +91,8 @@ router.post("/search", async (req, res, next) => {
         const numOfGames = apiResponse.games.count
         const numOfPages = Math.ceil(numOfGames/9);
         const page = apiResponse.page
-
-        //for search with filters see req.query.filter??
    
-        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages, isFirstPage, isLastPage});
+        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages, isFirstPage, isLastPage, session});
     } catch (error) {
         console.log(error)
         next(error);
@@ -93,9 +101,11 @@ router.post("/search", async (req, res, next) => {
 
 //pagination on search games
 router.post("/search/:page/:state/:gameName?", async (req, res, next) => {
+    const {session} = req
     let page = req.params.page;
     let gameName = req.params.gameName;
     let {state} = req.params;
+
     if(state === "next") page = +(page) +1;
     else page = +(page) -1
 
@@ -116,7 +126,7 @@ router.post("/search/:page/:state/:gameName?", async (req, res, next) => {
         if(page < numOfPages) isLastPage = false;
         else isLastPage = true;
         
-        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages, isFirstPage, isLastPage});
+        res.render("games/game-list", {games, page, gameName, numOfGames, numOfPages, isFirstPage, isLastPage, session});
     } catch (error) {
         console.log(error);
         next(error);
@@ -209,11 +219,12 @@ router.post("/addFreeGame/:id", isLoggedIn, async (req, res, next) =>{
 //get best games
 
 router.get("/best-games", isLoggedIn, async (req, res, next) => {
+    const {session} = req
     try {
         const apiResponse = await getBestGames();
         const games = apiResponse.results;
         console.log(games);
-        res.render("games/best-games", {games});
+        res.render("games/best-games", {games, session});
     } catch (error) {
         console.log(error);
         next(error);
@@ -221,6 +232,7 @@ router.get("/best-games", isLoggedIn, async (req, res, next) => {
 })
 
 router.post('/bestGames/:genres', async (req, res, next) => {
+    const {session} = req
     let genres = req.params.genres;
     let bigGenres = capitalize(genres)
     //do good rpg genre
@@ -229,7 +241,7 @@ router.post('/bestGames/:genres', async (req, res, next) => {
     const apiResponse = await getBestGames(genres);
     const games = apiResponse.results;
     console.log(games);
-    res.render('games/best-games', {games, bigGenres});
+    res.render('games/best-games', {games, bigGenres, session});
     } catch (error) {
         console.log(error);
         next(error)
@@ -239,6 +251,7 @@ router.post('/bestGames/:genres', async (req, res, next) => {
 //get user games
 
 router.get("/user-created-games", isLoggedIn, async (req, res, next) => {
+    const {session} = req
     try {
         const userGames = await Game.find({user_created_game: true});
         //sort usergames by likes here!!!!!!!!!!!!!!!!
@@ -246,7 +259,7 @@ router.get("/user-created-games", isLoggedIn, async (req, res, next) => {
         let sortedUserGames = userGames.sort((a, b) => b.likes.length - a.likes.length)
         console.log(sortedUserGames);
         
-        res.render("games/user-games", {sortedUserGames});
+        res.render("games/user-games", {sortedUserGames, session});
     } catch (error) {
         console.log(error);
         next(error)
@@ -255,9 +268,14 @@ router.get("/user-created-games", isLoggedIn, async (req, res, next) => {
 
 //get free games
 
-router.get("/free-games", isLoggedIn, (req, res, next) => res.render('games/free-games-list'))
+router.get("/free-games", isLoggedIn, (req, res, next) => {
+    const {session} = req
+    res.render('games/free-games-list', {session})
+})
 
+//here, when no results, show message saying no results
 router.post("/free-games", async(req, res, next) => {
+    const {session} = req
     const searchTerm = req.body.searchTerm;
     try {
         const allFreeGames = await getFreeGames();
@@ -268,7 +286,7 @@ router.post("/free-games", async(req, res, next) => {
             if(gameName.includes(searchTerm)) gamesArr.push(game);
         })
         console.log(gamesArr)
-        res.render('games/free-games-list', {gamesArr})
+        res.render('games/free-games-list', {gamesArr, session})
     } catch (error) {
         console.log(error)
         next(error)
@@ -278,6 +296,7 @@ router.post("/free-games", async(req, res, next) => {
 //details free game
 
 router.get('/details/free-game/:id', async (req, res, next) =>{
+    const {session} = req
     const gameId = req.params.id;
     const currentUserId = req.session.currentUser._id;
     try {
@@ -301,7 +320,7 @@ router.get('/details/free-game/:id', async (req, res, next) =>{
         console.log(freeGame)
 
 
-        res.render('games/free-games-details', {freeGame, isGameOnFavorites})
+        res.render('games/free-games-details', {freeGame, isGameOnFavorites, session})
     } catch (error) {
         console.log(error)
         next(error)

@@ -37,7 +37,7 @@
   <img src="/images/404.png" class="card-img-top" alt="Game Photo" style="max-height: 10rem;">
   {{/unless}}
   <div class="card-body">
-    <h5 class="card-title">{{name}}</h5>
+    <h4 class="card-title">{{name}}</h4>
     <hr>
     {{#if genres.1.name}}
     <p class="card-text">{{genres.0.name}} || {{genres.1.name}}</p>
@@ -46,6 +46,7 @@
     <p class="card-text">{{genres.0.name}}</p>
     {{/unless}}
   </div>
+    
     <a href="/details/{{id}}" class="page-btn">Go to details</a>
   </div>
   {{/each}}

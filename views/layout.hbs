@@ -7,6 +7,8 @@
     <title>GamingHub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     
+    
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/style.gameList.css">
   </head>
@@ -36,11 +38,14 @@
             <li class="navbar-nav-li-more"><a class="nav-link-li" href="/free-games">Free!</a></li>
           </ul>
         </li>
-        {{#unless username}}
+        {{#unless session.currentUser}}
         <li class="navbar-nav-li"><a class="nav-link" href="/auth/signup">Sign Up</a></li>
         <li class="navbar-nav-li"> <a class="nav-link" href="/auth/login">Log In</a></li>
         {{/unless}}
+        {{#if session.currentUser}}
+        <li class="navbar-nav-li"><a class="nav-link" href="/auth/logout">Log Out</a></li>
         <li class="navbar-nav-li"><a class="nav-link" href="/profile">My Profile</a></li>
+        {{/if}}
         <div class ="search">
         <form action="/search" method="post">
         <input class="search_input" type="text" name="game" id="search" placeholder="Search Games">
