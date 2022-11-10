@@ -181,8 +181,11 @@ router.post('/addGame/:id', isLoggedIn, async (req, res, next) => {
             const userCreatedFavoritedGame = await Game.findById(gameId);
             await User.findByIdAndUpdate(currentUser._id, {$push: {favoriteGames: userCreatedFavoritedGame._id}});
             //likes
-            if(!(userCreatedFavoritedGame.likes.includes(username)))
-            await Game.findByIdAndUpdate(gameId, {$push:{likes: username}})
+            if(!(userCreatedFavoritedGame.likes.includes(username))){
+    
+                await Game.findByIdAndUpdate(gameId, {$push:{likes: username}})
+            
+            }
         }
         res.redirect(`/details/${gameId}`);
     } catch (error) {

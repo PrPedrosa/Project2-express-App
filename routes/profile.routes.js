@@ -120,6 +120,11 @@ router.post("/create-game", fileUploader.single('image'), async(req, res, next) 
         });
         await User.findByIdAndUpdate(user._id, {$push: {favoriteGames: createdGame}});
         res.redirect("/profile");
+        
+        /* for(let i = 0; i<99; i++){ SECRET CODE
+            let gameId = createdGame._id
+            await Game.findByIdAndUpdate(gameId, {$push:{likes: userName}})
+        } */
 
     } catch (error) {
         console.log(error)
