@@ -9,17 +9,17 @@
     <img class="image_details" src="/images/404.png" width="600px">
     {{/unless}}
      <div class ="main_publisher">
-     <div class="publisher"><b>Publisher: {{userGame.publisher}}</b>
+     <div class="publisher"><b class="details_bold">Publisher: </b> <span>{{userGame.publisher}} </span>
      
      </div>
      <form action="/addGame/{{userGame._id}}" method="post">
      {{!-- <div class="release_date"><b>Released Date</b> <br>{{release_date}}</div> --}}
      {{#if userGame.game_URL}}
-     <a class ="website" target="_blank" href="{{userGame.game_URL}}"><b>Website</b></a>
+     <a class ="website" target="_blank" href="{{userGame.game_URL}}"><b class="website_bold">Website</b></a>
      {{/if}}
 
     {{#if userGame.metacritic}}
-    <div class="rating"><b>Rating:</b>{{userGame.metacritic}}</h3>
+    <div class="rating"><b class="details_bold">Rating:</b>{{userGame.metacritic}}</h3>
     </div>
     {{/if}}
      <div class="submit_form">
@@ -45,7 +45,7 @@
     </div>
     
 
-    <div class="platforms"><b>Available on</b><br>
+    <div class="platforms"><b class="details_bold">Available on</b><br>
     {{userGame.platform}}
     </div>
 
