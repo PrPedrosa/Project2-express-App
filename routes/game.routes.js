@@ -10,7 +10,7 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 /* const axios = require("axios") */;
 //GamingHub for name??
 
-//get game details
+//get game details or usergame details
 
 router.get("/details/:id", isLoggedIn, async(req, res, next) =>{
     try {
@@ -19,6 +19,7 @@ router.get("/details/:id", isLoggedIn, async(req, res, next) =>{
         const currentUserId = req.session.currentUser._id;
         const userToCheck = await User.findById(currentUserId).populate("favoriteGames");
         const userFavorites = userToCheck.favoriteGames;
+
 
 
         //get big api game details
@@ -37,9 +38,18 @@ router.get("/details/:id", isLoggedIn, async(req, res, next) =>{
                 return isGameOnFavorites = false
             } */
             })
+
+            let pokemonPage;
             
-            console.log(isGameOnFavorites)
-            res.render("games/game-details", {apigame, isGameOnFavorites, session});
+            if (gameId === '23762') {
+                 pokemonPage = true;
+            } else {
+                 pokemonPage = false;
+            }
+            
+        
+
+            res.render("games/game-details", {apigame, isGameOnFavorites, session, pokemonPage});
 
         
         //get user game details
@@ -78,6 +88,8 @@ router.get("/details/:id", isLoggedIn, async(req, res, next) =>{
             
             res.render("games/user-game-details", {userGame, userGameOnFavoritesAndCurrentUserNotTheCreator, userGameOnFavoritesAndCurrentUserIsTheCreator, userGameNotOnCurrentUserFavorites, session});
         }
+
+
         
     } catch (error) {
        console.log(error); 
@@ -339,6 +351,8 @@ router.get('/details/free-game/:id', async (req, res, next) =>{
         next(error)
     }
 })
+
+router.get('/pokemon', (req, res, next) => res.render('games/pokemon'));
 
 module.exports = router;
 
