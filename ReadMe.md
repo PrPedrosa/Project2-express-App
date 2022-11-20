@@ -1,10 +1,18 @@
-# IronGaming
+# GamingHub
 
 <br>
 
 
+Full Stack Application that allows the user to search for video games and create an account to see more details, add them to favourites, create games and other functionalities.
 
-## Description
+### Front-end: 
+Handlebars, Bootstrap
+<br>
+
+### Back-end: 
+Express.js, MongoDB
+
+<!-- ## Description
 
 
 Website that search for all types of free video-games(PC, Xbox, Playstation, Mobile, etc) using RAWG API.
@@ -55,14 +63,14 @@ Another search for either a random gamne/ best games ranked by user's likes (STI
 | `DELETE`   | `/private/favorites/:gameId` | Private route. Deletes the existing game from the current user. |                                                          |
 | `GET`      | `/video-games`                     | Renders `game-list` view.                              |                                                          |
 | `GET`      | `/games/details/:id`         | Renders `games-details` view for the particular restaurant. |                                                          |
+ -->
 
 
 
 
 
 
-
-## Models
+<!-- ## Models
 
 User model
 
@@ -99,49 +107,48 @@ Games model
 
 }
 
-```
+``` -->
 
 
 
 <br>
 
-## API's
+### Third party API's
 
 RAWG-Api 
 <br>
 FreeToGame-Api
 
-<br>
-
-
-## Packages
-
-Axios
-
-
-<br>
 
 
 
-## Backlog
+<!-- ## Packages
+Axios,  -->
+
+
+
+
+
+
+<!-- ## Backlog
 
 [See the Trello board.](https://trello.com/b/Ni3giVKf/ironhackproject)
-
+ -->
 
 
 <br>
 
 
 
-## Links
+## Deploy
 
 
 
-### Git
+<!-- ### Git
 
 The url to your repository and to your deployed project
 
-[https://github.com/PrPedrosa/Project2-express-App/tree/dev]()
+[https://github.com/PrPedrosa/Project2-express-App/tree/dev]() -->
 
 [https://project2videogames.herokuapp.com/]()
 
@@ -151,13 +158,13 @@ The url to your repository and to your deployed project
 
 
 
-### Slides
+<!-- ### Slides
 
 The url to your presentation slides
 
-[Slides Link](https://docs.google.com/presentation/d/1P5FIi0vHZBUcgUtmt1M4_lLCO5dwdJ4UOgtJa4ehGfk/edit?usp=sharing)
+[Slides Link](https://docs.google.com/presentation/d/1P5FIi0vHZBUcgUtmt1M4_lLCO5dwdJ4UOgtJa4ehGfk/edit?usp=sharing) -->
 
 ### Contributors
-Diana Pirlici - [`github`](https://github.com/DianaMariaa98) - [`linkedin`](https://www.linkedin.com/in/diana-pirlici/)
+Diana Pirlici - [`GitHub`](https://github.com/DianaMariaa98) - [`Linkedin`](https://www.linkedin.com/in/diana-pirlici/)
 
-Pedro Pedrosa - [`github`](https://github.com/PrPedrosa) - [`linkedin`](https://www.linkedin.com/in/prpedrosa/)
+Pedro Pedrosa - [`GitHub`](https://github.com/PrPedrosa) - [`Linkedin`](https://www.linkedin.com/in/prpedrosa/)
